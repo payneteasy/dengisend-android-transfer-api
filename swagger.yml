@@ -1,0 +1,600 @@
+swagger: "2.0"
+info:
+  title: Payneteasy Android Transfer DAPI
+  version: "0.2"
+paths:
+  /auth/{bank_id}/request-access-token:
+    get:
+      summary: Generate access token for transfer operation
+      parameters:
+      - name: bank_id
+        in: path
+        type: string
+        description: Bank identifier
+        required: true
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Randomly generated access token
+          schema:
+            $ref: '#/definitions/AccessTokenResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /config/get-rate:
+    post:
+      summary: Get transfer rates and limits configuration
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: sessionData
+        in: body
+        required: true
+        description: Session info
+        schema:
+          $ref: '#/definitions/RatesRequest'
+      responses:
+        '200':
+          description: Rates and limits data
+          schema:
+            $ref: '#/definitions/RatesResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /transfer/initiate-transfer:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: Initiate transfer request
+      parameters:
+      - name: initiateTransferData
+        in: body
+        description: Device info, location data, session info, amount
+        required: true
+        schema:
+          $ref: '#/definitions/InitiateTransferRequest'
+      responses:
+        '200':
+          description: Enpoint config, rates, session tokens to perform transfer request
+          schema:
+            $ref: '#/definitions/InitiateTransferResponse'
+        '400':
+          description: Request data is invalid
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /cardrefs/{invoiceId}/get-client-ids:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: Fetch source and destination cards ids
+      parameters:
+        - name: invoiceId
+          in: path
+          type: string
+          description: Transfer transaction identifier
+          required: true
+        - name: performTransferRequestData
+          in: body
+          description: transfer data
+          required: true
+          schema:
+            $ref: '#/definitions/CardsIdsRequest'
+      responses:
+        '200':
+          description: Fetch Cards Ids response
+          schema:
+            $ref: '#/definitions/CardsIdsResponse'
+        '400':
+          description: Request data is invalid
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /transfer/{endpointId}/{invoiceId}:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: Perform transfer request
+      parameters:
+      - name: endpointId
+        in: path
+        type: string
+        description: Entry point identifier for transfer transaction
+        required: true
+      - name: invoiceId
+        in: path
+        type: string
+        description: Transfer transaction identifier
+        required: true
+      - name: performTransferRequestData
+        in: body
+        description: transfer data
+        required: true
+        schema:
+          $ref: '#/definitions/PerformTransferRequest'
+      responses:
+        '200':
+          description: Perform transfer response
+          schema:
+            $ref: '#/definitions/PerformTransferResponse'
+        '400':
+          description: Request data is invalid
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /transfer/{endpointId}/{invoiceId}/status:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: Get funds transfer status
+      parameters:
+      - name: endpointId
+        in: path
+        type: string
+        description: Entry point identifier for transfer transaction
+        required: true
+      - name: invoiceId
+        in: path
+        type: string
+        description: Transfer transaction identifier
+        required: true
+      - name: transferStatusRequest
+        in: body
+        description: Transfer data to check
+        required: true
+        schema:
+          $ref: '#/definitions/TransferStatusRequest'
+      responses:
+        '200':
+          description: Transfer status response
+          schema:
+            $ref: '#/definitions/TransferStatusResponse'
+        '400':
+          description: Request data is invalid
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /support/send-message:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: send feedback to support
+      parameters:
+      - name: sendFeedbackRequest
+        in: body
+        description: Transfer data to check
+        required: true
+        schema:
+          $ref: '#/definitions/SendFeedbackRequest'
+      responses:
+        '200':
+          description: Send feedback response
+          schema:
+            $ref: '#/definitions/SendFeedbackResponse'
+        '400':
+          description: Request data is invalid
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  Session:
+    type: object
+    properties:
+      accessToken:
+        type: string
+        description: The consumer’s access token key
+      nonce:
+        type: string
+        description: Random string, uniquely generated by the proxy
+      signature:
+        type: string
+        description: Checksum generated by hmac-sha1 of accessToken + device.serialNumber + endpointId + nonce + invoiceId + amountCentis + currency
+      token:
+        type: string
+        description: The session token of transfer transaction
+  Consumer:
+    type: object
+    properties:
+      device:
+        type: object
+        required:
+        - serialNumber
+        properties:
+          imei:
+            type: string
+            description: The consumer’s device international mobile equipment identity
+          serialNumber:
+            type: string
+            description: The consumer's device serial number
+      ipAddresses:
+        type: array
+        description: Consumer's IP addresses
+        items:
+          type: string
+          minLength: 7
+          maxLength: 15
+      email:
+        type: string
+        description: The consumer’s email address
+  Transaction:
+    type: object
+    properties:
+      endpointId:
+        type: string
+        description: Entry point identifier for transfer transaction
+      invoiceId:
+        type: string
+        description: Transfer transaction identifier
+      amountCentis:
+        type: integer
+        format: int64
+        description: Transaction amount, 1.00 EUR = 100 centis
+      commissionCentis:
+        type: integer
+        format: int64
+        description: Amount of commission held in centis
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Transaction currency, upper case letters (ISO 4217 alpha code)
+      orderCreatedDate:
+        type: string
+        description: Order creation date in payment processing system
+      transactionCreatedDate:
+        type: string
+        description: Transaction creation date in payment processing system
+  SourceOfFunds:
+    type: object
+    required:
+      - card
+    description: Only one of these subtypes (card, reference) should be used
+    properties:
+      card:
+        type: object
+        required:
+        - number
+        - expiry
+        - holder
+        - securityCode
+        properties:
+          number:
+            type: string
+            description: Source card number (PAN)
+          expiry:
+            type: object
+            required:
+              - month
+              - year
+            properties:
+              month:
+                type: integer
+                format: int32
+                description: Source Card expiration month
+              year:
+                type: integer
+                format: int32
+                description: Source Card expiration year
+          holder:
+            type: object
+            required:
+              - firstName
+              - lastName
+            properties:
+              firstName:
+                type: string
+                description: Cardholder’s first name
+              lastName:
+                type: string
+                description: Cardholder’s last name
+          securityCode:
+            type: string
+            description: Source card security code (CVV)
+      reference:
+        type: object
+        required:
+        - clientCardId
+        - securityCode
+        properties:
+          clientCardId:
+            type: string
+            description: Source card reference identifier (on client side)
+          securityCode:
+            type: string
+            description: Source card security code (CVV)
+  DestinationOfFunds:
+    type: object
+    required:
+      - card
+    description: Only one of these subtypes (card, reference) should be used
+    properties:
+      card:
+        type: object
+        required:
+        - number
+        properties:
+          number:
+            type: string
+            description: Destination card number (PAN)
+      reference:
+        type: object
+        properties:
+          clientCardId:
+            type: string
+            description: The destination card reference identifier (on client side)
+  Error:
+    type: object
+    properties:
+      cause:
+        type: string
+        description: 'The cause of the error'
+        enum:
+        - FILTERED
+        - DECLINED
+        - INVALID_CONFIGURATION
+        - INVALID_REQUEST
+        - INTERNAL_ERROR
+        - PROCESSING_FAILED
+        - SERVER_FAILED
+        - SERVER_UNAVAILABLE
+        - ORDER_NOT_FOUND
+      code:
+        type: string
+        description: The unique error code
+      message:
+        type: string
+        description: the description of the error
+  AccessTokenResponse:
+    type: object
+    properties:
+      session:
+        $ref: '#/definitions/Session'
+  RatesRequest:
+    type: object
+    required:
+    - consumer
+    - session
+    properties:
+      consumer:
+        $ref: '#/definitions/Consumer'
+      session:
+        $ref: '#/definitions/Session'
+  RatesResponse:
+    type: object
+    properties:
+      rateInterest:
+        type: number
+        format: double
+        description: Transfer rate interest (percent)
+      rateMin:
+        type: number
+        format: double
+        description: Minimum commission amount
+      rateMax:
+        type: number
+        format: double
+        description: Maximum commission amount
+      limitMin:
+        type: number
+        format: double
+        description: Minimum transfer amount
+      limitMax:
+        type: number
+        format: double
+        description: Maximum transfer amount
+      error:
+        type: object
+        properties:
+          cause:
+            type: string
+            description: the cause of the error
+          code:
+            type: string
+            description: The unique error code
+          message:
+            type: string
+            description: the description of the error
+  InitiateTransferRequest:
+    type: object
+    required:
+    - consumer
+    - transaction
+    properties:
+      consumer:
+        $ref: '#/definitions/Consumer'
+      location:
+        type: object
+        properties:
+          lat:
+            type: number
+            format: double
+            description: The latitude specified in the range of -90.0 through +90.0, both inclusive
+          lng:
+            type: number
+            format: double
+            description: The longitude specified in the range -180.0 through +180.0, both inclusive
+      session:
+        $ref: '#/definitions/Session'
+      transaction:
+        $ref: '#/definitions/Transaction'
+  InitiateTransferResponse:
+    type: object
+    properties:
+      endpointId:
+        type: string
+        description: Entry point identifier for transfer transaction
+      invoiceId:
+        type: string
+        description: Transfer transaction identifier
+      rates:
+        type: object
+        properties:
+          min:
+            type: string
+            description: Possible minimum commission amount
+          max:
+            type: string
+            description: Possible maximum commission amount
+      session:
+        $ref: '#/definitions/Session'
+      error:
+        $ref: '#/definitions/Error'
+  PerformTransferRequest:
+    type: object
+    required:
+    - consumer
+    - destinationOfFunds
+    - sourceOfFunds
+    - session
+    - transaction
+    properties:
+      consumer:
+        $ref: '#/definitions/Consumer'
+      sourceOfFunds:
+        $ref: '#/definitions/SourceOfFunds'
+      destinationOfFunds:
+        $ref: '#/definitions/DestinationOfFunds'
+      transaction:
+        $ref: '#/definitions/Transaction'
+      session:
+        $ref: '#/definitions/Session'
+  PerformTransferResponse:
+    type: object
+    properties:
+      invoiceId:
+        type: string
+      session:
+        $ref: '#/definitions/Session'
+      error:
+        $ref: '#/definitions/Error'
+  TransferStatusRequest:
+    type: object
+    required:
+    - session
+    properties:
+      session:
+        $ref: '#/definitions/Session'
+  TransferStatusResponse:
+    type: object
+    properties:
+      bankOrderId:
+        type: string
+        description: Required if state is APPROVED or DECLINED
+      orderId:
+        type: string
+        description: Order identifier in payment processing system
+      invoiceId:
+        type: string
+        description: Transfer transaction identifier
+      redirectUrl:
+        type: string
+        description: Required if state is REDIRECT_REQUEST
+      session:
+        $ref: '#/definitions/Session'
+      state:
+        type: string
+        description: 'The state of the transfer'
+        enum:
+        - PROCESSING
+        - REDIRECT_REQUEST
+        - APPROVED
+        - DECLINED
+      transaction:
+        $ref: '#/definitions/Transaction'
+      error:
+        $ref: '#/definitions/Error'
+      errorCode:
+        type: integer
+        format: int32
+        description: Decline reason code, may present if state is DECLINED
+      errorMessage:
+        type: string
+        description: Decline reason message, may present if state is DECLINED
+      secure3DAuthStatus:
+        type: string
+        description: '3D authentication status'
+        enum:
+        - AUTHENTICATED
+        - NOT_AUTHENTICATED
+        - UNSUPPORTED
+        - DECLINED
+      randomSumAuthStatus:
+        type: string
+        description: 'Random sum authentication status'
+        enum:
+        - AUTHENTICATED
+        - NOT_AUTHENTICATED
+  CardsIdsRequest:
+    type: object
+    required:
+    - consumer
+    - session
+    properties:
+      consumer:
+        $ref: '#/definitions/Consumer'
+      session:
+        $ref: '#/definitions/Session'
+  CardsIdsResponse:
+    type: object
+    properties:
+      sourceCardRefId:
+        type: string
+        description: The source card reference identifier (on client side)
+      destinationCardRefId:
+        type: string
+        description: The destination card reference identifier (on client side)
+      error:
+        $ref: '#/definitions/Error'
+  SendFeedbackRequest:
+    type: object
+    properties:
+      message:
+        type: string
+      email:
+        type: string
+      orderId:
+        type: string
+      session:
+        $ref: '#/definitions/Session'
+  SendFeedbackResponse:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+  ErrorResponse:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      invoiceId:
+        type: string
+        description: Transfer transaction identifier

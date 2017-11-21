@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+group 'com.payneteasy.android'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    retrofit_version = "2.0.2"
+    swagger_annotations_version = "1.5.15"
+    junit_version = "4.12"
+    jodatime_version = "2.9.9"
+    okhttp_version = "2.7.5"
+}
+
+dependencies {
+    compile "io.swagger:swagger-annotations:$swagger_annotations_version"
+    compile "com.squareup.okhttp:okhttp:$okhttp_version"
+    compile "com.squareup.okhttp:logging-interceptor:$okhttp_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile "joda-time:joda-time:$jodatime_version"
+    testCompile group: 'junit', name: 'junit', version: "$junit_version"
+}
