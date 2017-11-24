@@ -54,34 +54,379 @@ Then manually install the following JARs:
 
 ## Getting Started
 
-Please follow the [installation](#installation) instruction and execute the following Java code:
+Please follow the [installation](#installation) instruction.
+
+### Models
+
+Implementation examples are in a "models" folder .
+
+### Create and setup MerchantAPI instance
 
 ```java
 
-import com.payneteasy.android.*;
-import com.payneteasy.android.auth.*;
-import com.payneteasy.android.model.*;
-import com.payneteasy.android.api.DefaultApi;
+// MERCHANT API
+ApiClient merchantApiClient = new ApiClient();
+merchantApiClient.setBasePath(Config.MERCHANT_BASE_ADDRESS);
+merchantApi = new DefaultApi(merchantApiClient);
 
-import java.io.File;
-import java.util.*;
+```
 
-public class DefaultApiExample {
+### Create and setup PaynetEasyTransferAPI instance
 
-    public static void main(String[] args) {
+```java
+
+// PNE API
+ApiClient paynetEasyApiClient = new ApiClient();
+paynetEasyApiClient.setBasePath(Config.PAYNET_BASE_ADDRESS);
+paynetEasyApi = new DefaultApi(paynetEasyApiClient);
+
+```
+
+### Get access token
+
+```java
+requestAccessToken(new TransferContract.RequestAccessTokenCallback() {
+    @Override
+    public void onFailure(String errorMessage) {
+        requestCommissionCallback.onFailure(errorMessage);
+    }
+
+    @Override
+    public void onSuccess(AccessTokenResponse result) {
+
+        session.setAccessToken(result.getSession().getAccessToken());
+
+        requestCommission(requestCommissionCallback);
+    }
+});
+
+merchantApi.authBankIdRequestAccessTokenGetAsync(Config.DENGISEND_IDENTIFIER, new DengisendApiCallback<AccessTokenResponse>() {
+    @Override
+    public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("ACCESS TOKEN FAILURE", e.getMessage());
         
-        DefaultApi apiInstance = new DefaultApi();
-        String bankId = "bankId_example"; // String | Bank identifier
-        try {
-            AccessTokenResponse result = apiInstance.authBankIdRequestAccessTokenGet(bankId);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#authBankIdRequestAccessTokenGet");
-            e.printStackTrace();
+        requestAccessTokenCallback.onFailure(e.getMessage());
+    }
+    
+    @Override
+    public void onSuccess(AccessTokenResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("ACCESS TOKEN OK", result.getSession().getAccessToken());
+        
+        requestAccessTokenCallback.onSuccess(result);
+    }
+});
+```
+
+### Get transfer rate
+
+```java
+merchantApi.authBankIdRequestAccessTokenGetAsync(Config.DENGISEND_IDENTIFIER, new DengisendApiCallback<AccessTokenResponse>() {
+    @Override
+    public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("ACCESS TOKEN FAILURE", e.getMessage());
+        
+        requestAccessTokenCallback.onFailure(e.getMessage());
+    }
+    
+    @Override
+    public void onSuccess(AccessTokenResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("ACCESS TOKEN OK", result.getSession().getAccessToken());
+        
+        requestAccessTokenCallback.onSuccess(result);
+    }
+});
+```
+
+### Initiate Transfer
+
+```java
+merchantApi.transferInitiateTransferPostAsync(initiateTransferRequest, new DengisendApiCallback<InitiateTransferResponse>() {
+    @Override
+    public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("INIT TRANSFER FAILURE", e.getMessage());
+
+        processTransferCallback.onInitiateTransferFailure(e.getMessage());
+    }
+
+    @Override
+    public void onSuccess(InitiateTransferResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+
+        if (result.getError() != null) {
+            Log.d("INIT TRANSFER ERROR", result.getError().toString());
+
+            processTransferCallback.onInitiateTransferFailure(result.getError().toString());
+        } else {
+            Log.d("INIT TRANSFER OK", result.toString());
+
+            processTransferCallback.onInitiateTransferSuccess();
+
+            transfer.getTransaction().setEndpointId(result.getEndpointId());
+            transfer.getTransaction().setInvoiceId(result.getInvoiceId());
+
+            session.setNonce(result.getSession().getNonce());
+            session.setSignature(result.getSession().getSignature());
+
+            performTransfer(transfer, processTransferCallback);
         }
     }
-}
+});
+```
 
+### Perform Transfer
+
+```java
+DengisendApiCallback<PerformTransferResponse> performTransferResponseApiCallback = new DengisendApiCallback<PerformTransferResponse>() {
+    @Override
+    public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("PERFORM TRANSFER ERROR", e.getMessage());
+
+        processTransferCallback.onPerformTransferFailure(e.getMessage());
+    }
+
+    @Override
+    public void onSuccess(PerformTransferResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+
+        if (result.getError() != null) {
+            Log.d("PERFORM TRANSFER ERROR", result.getError().toString());
+
+            processTransferCallback.onPerformTransferFailure(result.getError().toString());
+        } else {
+            Log.d("PERFORM TRANSFER OK", result.toString());
+
+            processTransferCallback.onPerformTransferSuccess();
+
+            session.setToken(result.getSession().getToken());
+
+            receipt.setStatus(TransferStatus.UNKNOWN.toString());
+
+            // Going to check the transfer status
+            checkTransferStatus(transfer, processTransferCallback);
+        }
+    }
+};
+
+try {
+    // PERFORM TRANSFER
+    paynetEasyApi.transferEndpointIdInvoiceIdPostAsync(endpointId, invoiceId,
+            performTransferRequestData, performTransferResponseApiCallback);
+} catch (ApiException apiException) {
+    Log.d("PERFORM TRANSFER ERROR", apiException.getMessage());
+
+    processTransferCallback.onPerformTransferFailure(apiException.getMessage());
+}
+```
+
+### Check Transfer Status
+
+```java
+DengisendApiCallback<TransferStatusResponse> callback = new DengisendApiCallback<TransferStatusResponse>() {
+    @Override
+    public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+        Log.d("TRANSFER STATUS ERROR", e.getMessage());
+
+        processTransferCallback.onCheckTransferStatusFailure(e.getMessage());
+    }
+
+    @Override
+    public void onSuccess(TransferStatusResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+
+        if (result.getError() != null) {
+            Log.d("TRANSFER STATUS ERROR", result.getError().toString());
+
+            processTransferCallback.onCheckTransferStatusFailure(result.getError().toString());
+
+            transfer.getReceipt().setStatus(TransferStatus.ERROR.toString());
+
+            // TODO: what happened with the request? what is the actual transfer's status?
+
+        } else {
+            Log.d("TRANSFER STATUS OK", result.toString());
+
+            processTransferCallback.onCheckTransferStatusSuccess();
+
+            boolean needRepeat = false;
+
+            TransferStatusResponse.StateEnum state = result.getState();
+
+            // PROCESSING
+            if (state == TransferStatusResponse.StateEnum.PROCESSING) {
+                needRepeat = true;
+
+                processTransferCallback.onTransferProcessing();
+            }
+            // APPROVED
+            else if (state == TransferStatusResponse.StateEnum.APPROVED) {
+
+                // Fill receipt with data and set status
+                parseReceipt(transfer.getReceipt(), result);
+
+                processTransferCallback.onTransferApproved(transfer.getReceipt());
+            }
+            // REDIRECT
+            else if (state == TransferStatusResponse.StateEnum.REDIRECT_REQUEST) {
+
+                processTransferCallback.onTransferRedirect(result.getRedirectUrl());
+
+                needRepeat = true;
+            }
+            // DECLINED
+            else {
+
+                // Fill receipt with data and set status
+                parseReceipt(transfer.getReceipt(), result);
+
+                processTransferCallback.onTransferDeclined(transfer.getReceipt());
+            }
+
+            // repeat
+            if (needRepeat) {
+                try {
+                    Log.d("TRANSFER STATUS OK", "going to repeat");
+                    Thread.sleep(_updateInterval);
+                    checkTransferStatus(transfer, processTransferCallback);
+                } catch (InterruptedException e) {
+                    Log.d("TRANSFER STATUS Error", "repeat request failed");
+                    processTransferCallback.onCheckTransferStatusFailure(e.getMessage());
+                }
+            }
+        }
+    }
+
+    private void parseReceipt(Receipt receipt, TransferStatusResponse result) {
+        receipt.setOrderId(result.getOrderId());
+        receipt.setDate(result.getTransaction().getTransactionCreatedDate());
+        receipt.setAmountCentis(result.getTransaction().getAmountCentis().intValue());
+        receipt.setCommissionCentis(result.getTransaction().getCommissionCentis().intValue());
+        receipt.setCurrency(result.getTransaction().getCurrency());
+
+        if (result.getState() == TransferStatusResponse.StateEnum.APPROVED){
+            receipt.setStatus(TransferStatus.APPROVED.toString());
+        }
+
+        if (result.getState() == TransferStatusResponse.StateEnum.DECLINED){
+            receipt.setStatus(TransferStatus.DECLINED.toString());
+        }
+    }
+};
+
+try {
+    // TRANSFER STATUS
+    paynetEasyApi.transferEndpointIdInvoiceIdStatusPostAsync(endpointId, invoiceId, checkTransferRequest, callback);
+} catch (ApiException apiException) {
+    Log.d("TRANSFER STATUS Error", apiException.getMessage());
+
+    processTransferCallback.onCheckTransferStatusFailure(apiException.getMessage());
+}
+```
+
+### Get cards Ids
+
+```java
+CardsIdsRequest cardsIdsRequest = new CardsIdsRequest();
+cardsIdsRequest.session(session).consumer(consumer);
+
+DengisendApiCallback<CardsIdsResponse> cardsIdsResponseApiCallback = new DengisendApiCallback<CardsIdsResponse>() {
+    @Override
+    public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+        cardsIdsCallback.onFailure(e.getMessage());
+    }
+
+    @Override
+    public void onSuccess(CardsIdsResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+        cardsIdsCallback.onSuccess(result);
+    }
+};
+
+try {
+    // FETCH CARDs IDs
+    merchantApi.cardrefsInvoiceIdGetClientIdsPostAsync(invoiceId, cardsIdsRequest, cardsIdsResponseApiCallback);
+} catch (ApiException apiException) {
+    cardsIdsCallback.onFailure(apiException.getMessage());
+}
+```
+
+### Example of TransferContract
+
+```java
+public interface TransferContract {
+
+    interface Service {
+
+        void clearSession();
+
+        void requestCommission(RequestCommissionCallback requestCommissionCallback);
+
+        void initiateTransfer(Transfer transfer, TransferContract.ProcessTransferCallback processTransferCallback);
+
+        void performTransfer(Transfer transfer, TransferContract.ProcessTransferCallback processTransferCallback);
+
+        void checkTransferStatus(Transfer transfer, TransferContract.ProcessTransferCallback processTransferCallback);
+
+        void getCardsIdsForInvoiceId(final String invoiceId, TransferContract.RequestCardsIdsCallback cardsIdsCallback);
+    }
+
+    interface RequestCommissionCallback {
+
+        void onFailure(String errorMessage);
+
+        void onSuccess(RatesResponse result);
+    }
+
+    interface RequestAccessTokenCallback {
+
+        void onFailure(String errorMessage);
+
+        void onSuccess(AccessTokenResponse result);
+    }
+
+    interface ProcessTransferCallback {
+
+        void onInitiateTransferFailure(String errorMessage);
+
+        void onInitiateTransferSuccess();
+
+        void onPerformTransferFailure(String errorMessage);
+
+        void onPerformTransferSuccess();
+
+        void onCheckTransferStatusFailure(String errorMessage);
+
+        void onCheckTransferStatusSuccess();
+
+        void onTransferProcessing();
+
+        void onTransferRedirect(String redirectUrl);
+
+        void onTransferApproved(Receipt receipt);
+
+        void onTransferDeclined(Receipt receipt);
+    }
+
+    interface RequestCardsIdsCallback {
+
+        void onFailure(String errorMessage);
+
+        void onSuccess(CardsIdsResponse result);
+    }
+}
+```
+
+### Example of DengisendApiCallback
+
+```java
+public abstract class DengisendApiCallback<T> implements ApiCallback<T> {
+    @Override
+    public abstract void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders);
+
+    @Override
+    public abstract void onSuccess(T result, int statusCode, Map<String, List<String>> responseHeaders);
+
+    @Override
+    public void onUploadProgress(long bytesWritten, long contentLength, boolean done) { }
+
+    @Override
+    public void onDownloadProgress(long bytesRead, long contentLength, boolean done) { }
+}
 ```
 
 ## Documentation for API Endpoints
@@ -133,16 +478,8 @@ Class | Method | HTTP request | Description
  - [TransferStatusResponse](docs/TransferStatusResponse.md)
 
 
-## Documentation for Authorization
-
-All endpoints do not require authorization.
-Authentication schemes defined for the API:
-
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-
-## Author
-
 
 
