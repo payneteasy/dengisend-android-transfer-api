@@ -1,5 +1,7 @@
 # Android
 
+PaynetEasyTransfer SDK provides money transfer between cards Visa/MasterCard in Android app.
+
 ## Getting Started
 
 ### Models
