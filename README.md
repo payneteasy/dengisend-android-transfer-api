@@ -183,8 +183,6 @@ DengisendApiCallback<TransferStatusResponse> callback = new DengisendApiCallback
 
             transfer.getReceipt().setStatus(TransferStatus.ERROR.toString());
 
-            // TODO: what happened with the request? what is the actual transfer's status?
-
         } else {
             Log.d("TRANSFER STATUS OK", result.toString());
 
@@ -376,8 +374,6 @@ public abstract class DengisendApiCallback<T> implements ApiCallback<T> {
 ```
 
 ## Documentation for API Endpoints
-
-All URIs are relative to *https://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
