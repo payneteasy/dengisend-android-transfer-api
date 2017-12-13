@@ -1,0 +1,93 @@
+apply from: '../banks.gradle'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.payneteasy.dengisend"
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix = ".mock"
+            buildConfigField "String", "PAYNET_BASE_URL", "\"https://sandbox.payneteasy.com/paynet/dapi/v1\""
+            buildConfigField "String", "MERCHANT_BASE_URL", "\"https://dengisend-transfer-ios.pne.io\""
+            versionNameSuffix = "-${getCurrentDate()}"
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    flavorDimensions 'tier'
+
+    // If you need to add more flavors, consider using flavor dimensions.
+    // flavor name = bank
+    productFlavors {
+        dengisend {
+            applicationIdSuffix = ".dengisend"
+        }
+    }
+    buildToolsVersion '26.0.2'
+}
+
+android.applicationVariants.all { variant ->
+    variant.buildConfigField "String", "BANK_ID", "\"" + banksMap[variant.productFlavors.get(0).name] + "\""
+}
+
+dependencies {
+    compile project(':dengisend')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+
+    // card.io
+    compile "io.card:android-sdk:$rootProject.cardioVersion"
+
+    // Dagger dependencies
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+
+    // Dependencies for local unit tests
+    testCompile "junit:junit:$rootProject.ext.junitVersion"
+    androidTestCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+
+    // Espresso UI Testing
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    androidTestCompile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    androidTestCompile "com.android.support:design:$rootProject.supportLibraryVersion"
+    androidTestCompile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    androidTestCompile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+}
+
+def static getCurrentDate() {
+    return new Date().format('yyyyMMddHHmm')
+}

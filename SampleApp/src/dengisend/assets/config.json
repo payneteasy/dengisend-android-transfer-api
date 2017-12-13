@@ -1,0 +1,194 @@
+{
+	"name" : "Dengisend",
+    "home" : {
+        "url" : "https://dengisend.ru"
+    },
+    "rules" : {
+        "url" : "https://dengisend.ru/demo-ios/dengisend/rules.html"
+    },
+    "rates" : {
+        "url" : "https://dengisend.ru/demo-ios/dengisend/rates.html"
+    },
+    "offer1" : {
+        "name" : "Оферта ПАО «Промсвязьбанк»",
+        "url" : "https://dengisend.ru/demo-ios/offers/offer_psb.html"
+    },
+    "offer2" : {
+        "name" : "Оферта ПАО «БИНБАНК»",
+        "url" : "https://dengisend.ru/demo-ios/offers/offer_binbank.html"
+	},
+	"tintColor" : {
+		"rgb" : "ffd400",
+		"alpha" : 1
+	},
+	"backgroundColor" : {
+		"rgb" : "efeff4",
+		"alpha" : 1
+	},
+	"approvedColor" : {
+		"rgb" : "189b24",
+		"alpha" : 1
+	},
+	"declinedColor" : {
+		"rgb" : "ff0000",
+		"alpha" : 1
+	},
+	"toolBar" : {
+        "backgroundColor" : {
+            "rgb" : "485866",
+            "alpha" : 1
+        },
+		"titleColor" : {
+			"rgb" : "ffffff",
+			"alpha" : 1
+		},
+        "titleFont" : {
+            "name" : "Avenir-Book",
+            "size" : 17
+        },
+		"itemColor" : {
+			"rgb" : "ffffff",
+			"alpha" : 1
+		},
+		"itemFont" : {
+			"name" : "Avenir-Light",
+			"size" : 16
+		}
+	},
+	"tabBar" : {
+		"backgroundColor" : {
+			"rgb" : "485866",
+			"alpha" : 1
+		},
+		"textNormalColor" : {
+			"rgb" : "ffffff",
+			"alpha" : 1
+		},
+		"textSelectedColor" : {
+			"rgb" : "ffd400",
+			"alpha" : 1
+		},
+		"textFont" : {
+			"name" : "Avenir-Book",
+			"size" : 11
+		}
+	},
+	"activityIndicator" : {
+		"textFont" : {
+			"name" : "Avenir-Book",
+			"size" : 15
+		},
+        "spinnerColor" : {
+            "rgb" : "485866",
+            "alpha" : 1
+        },
+		"spinnerThickness" : 2.0,
+		"spinnerRadius" : 20.0
+	},
+	"tableView" : {
+        "backgroundColor" : {
+            "rgb" : "ffffff",
+            "alpha" : 1
+        },
+		"selectedColor" : {
+			"rgb" : "e1e1e9",
+			"alpha" : 1
+		},
+        "textFont" : {
+            "name" : "Avenir-Book",
+            "size" : 17
+        },
+        "textColor" : {
+            "rgb" : "404040",
+            "alpha" : 1
+        },
+        "positiveColor" : {
+            "rgb" : "189b24",
+            "alpha" : 1
+        },
+        "negativeColor" : {
+            "rgb" : "ff0000",
+            "alpha" : 1
+        }
+	},
+	"textTitle" : {
+		"textColor" : {
+			"rgb" : "333333",
+			"alpha" : 1
+		},
+		"textFont" : {
+			"name" : "Avenir-Light",
+			"size" : 18
+		}
+	},
+	"textSubTitle" : {
+		"textColor" : {
+			"rgb" : "686868",
+			"alpha" : 1
+		},
+		"textFont" : {
+			"name" : "Avenir-Light",
+			"size" : 18
+		}
+	},
+    "textField": {
+        "textColor" : {
+            "rgb" : "404040",
+            "alpha" : 1
+        },
+        "textFont" : {
+            "name" : "Helvetica",
+            "size" : 22
+        }
+    },
+    "textComment": {
+        "textColor" : {
+            "rgb" : "6d6d72",
+            "alpha" : 1
+        },
+        "textFont" : {
+            "name" : "Avenir-Light",
+            "size" : 14
+        }
+    },
+	"submitButton" : {
+		"enabledColor" : {
+			"rgb" : "485866",
+			"alpha" : 1
+		},
+		"disabledColor" : {
+			"rgb" : "a0a0a0",
+			"alpha" : 1
+		},
+		"textColor" : {
+			"rgb" : "ffffff",
+			"alpha" : 1
+		},
+		"textFont" : {
+			"name" : "Avenir-Light",
+			"size" : 19
+		}
+	},
+	"receipt" : {
+		"textName" : {
+			"textColor" : {
+				"rgb" : "6d6d72",
+				"alpha" : 1
+			},
+			"textFont" : {
+				"name" : "Avenir-Light",
+				"size" : 15
+			}
+		},
+		"textValue" : {
+			"textColor" : {
+				"rgb" : "404040",
+				"alpha" : 1
+			},
+			"textFont" : {
+				"name" : "Avenir-Medium",
+				"size" : 17
+			}
+		}
+	}
+}

@@ -1,0 +1,8 @@
+ext {
+    // map:
+    // flavor(bank) -> bank ID
+    banksMap = [
+            'dengisend'     : 'dengisend',
+            'kamkombank'    : 'kamkombank',
+    ]
+}

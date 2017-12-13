@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/transfer_scrollview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusableInTouchMode="true" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            android:labelFor="@+id/source_card_no"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/source_card_no" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/source_card_no"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:hint="@string/hint_card_no"
+                android:digits="01234 56789"
+                android:inputType="number"
+                android:maxLength="22"
+                android:paddingBottom="10dp"
+                android:paddingEnd="2dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="2dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp" />
+
+            <ImageView
+                android:id="@+id/source_card_type"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/source_card_no"
+                android:layout_alignEnd="@id/source_card_no"
+                android:layout_alignRight="@id/source_card_no"
+                android:layout_alignTop="@id/source_card_no"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"
+                app:srcCompat="@drawable/camera"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/source_card_exp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:hint="@string/hint_exp_date"
+                android:inputType="phone"
+                android:maxLength="7"
+                android:paddingBottom="10dp"
+                android:paddingEnd="2dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="2dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp" />
+
+            <EditText
+                android:id="@+id/source_card_cvc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:hint="@string/hint_cvc"
+                android:inputType="numberPassword"
+                android:maxLength="3"
+                android:paddingBottom="10dp"
+                android:paddingEnd="2dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="2dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            android:labelFor="@+id/dest_card_no"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/dest_card_no" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/dest_card_no"
+                android:tag="dest_card_no"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:hint="@string/hint_card_no"
+                android:digits="01234 56789"
+                android:inputType="number"
+                android:maxLength="22"
+                android:paddingBottom="10dp"
+                android:paddingEnd="2dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="2dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp" />
+
+            <ImageView
+                android:id="@+id/dest_card_type"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/dest_card_no"
+                android:layout_alignEnd="@id/dest_card_no"
+                android:layout_alignRight="@id/dest_card_no"
+                android:layout_alignTop="@id/dest_card_no"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"
+                app:srcCompat="@drawable/camera"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            android:labelFor="@+id/transfer_amount"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/amount" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/background_light"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:id="@+id/transfer_amount"
+                android:tag="transfer_amount"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_weight="9"
+                android:background="@android:color/background_light"
+                android:hint="@string/hint_zero"
+                android:inputType="number"
+                android:paddingBottom="10dp"
+                android:paddingEnd="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="0dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/rub"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/transfer_commission_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="6"
+                android:gravity="start"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/commission"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/transfer_commission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="3"
+                android:paddingBottom="10dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingStart="0dp"
+                android:paddingTop="10dp"
+                android:text="@string/hint_zero"
+                android:textAlignment="textEnd"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/commission_currency_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/rub"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/transfer_total_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="6"
+                android:gravity="start"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/total"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/transfer_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="3"
+                android:paddingBottom="10dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingStart="0dp"
+                android:paddingTop="10dp"
+                android:text="@string/hint_zero"
+                android:textAlignment="textEnd"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/total_currency_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_padding"
+                android:layout_marginRight="@dimen/list_item_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/rub"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_transfer"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/button_do_transfer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/btn_cancel_repeat"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:color/transparent"
+            android:text="@string/button_cancel_transfer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/transfer_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>

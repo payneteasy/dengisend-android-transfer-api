@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Переводы с карты на карту</string>
+    <string name="title_transfer">Перевод с карты на карту</string>
+    <string name="title_transfer_short">Перевод</string>
+    <string name="title_history">История</string>
+    <string name="title_receipt">Чек перевода</string>
+    <string name="title_receipt_p2p">Перевод с карты на карту</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_feedback">Обратная связь</string>
+    <string name="title_activity_web_view">Подтверждение перевода</string>
+    <string name="title_settings_offers">Публичные оферты банков-эквайеров</string>
+    <string name="title_general">Основное</string>
+
+    <string name="no_receipts">Нет переводов</string>
+    <string name="no_receipt_found">Перевод не найден</string>
+    <string name="successfully_saved_receipt_message">Чек сохранен</string>
+    <string name="loading_receipts_error">Ошибка загрузки истории переводов</string>
+
+    <string name="hint_card_no">Номер карты</string>
+    <string name="hint_exp_date">ММ / ГГ</string>
+    <string name="hint_cvc">CVC</string>
+    <string name="hint_zero">0</string>
+
+    <string name="source_card_no">Карта отправителя</string>
+    <string name="dest_card_no">Карта получателя</string>
+    <string name="amount">Сумма перевода</string>
+    <string name="commission">Комиссия:</string>
+    <string name="total">Итого с комиссией:</string>
+    <string name="rub">₽</string>
+    <string name="zero_rub">0 ₽</string>
+    <string name="amount_rub">%d ₽</string>
+    <string name="exp_date_format">%1$s / %2$s</string>
+    <string name="text_policy">Нажимая кнопку Перевести, я принимаю условия использования сервиса и публичные оферты банков-эквайеров</string>
+    <string name="text_policy_link1">сервиса</string>
+    <string name="text_policy_link2">публичные оферты</string>
+    <string name="cardholder_firstname">Cardholder</string>
+    <string name="cardholder_lastname">Name</string>
+
+    <string name="invalid_form_data">Указаны некорректные данные</string>
+    <string name="invalid_transfer_amount">Некорректная сумма перевода</string>
+    <string name="min_transfer_amount_allowed">Сумма перевода не может быть меньше %d ₽</string>
+    <string name="max_transfer_amount_allowed">Сумма перевода не может быть больше %d ₽</string>
+
+    <string name="button_do_transfer">Перевести</string>
+    <string name="button_cancel_transfer">Отменить</string>
+    <string name="button_repeat_transfer">Повторить перевод</string>
+    <string name="button_delete_receipt">Удалить из истории</string>
+    <string name="button_feedback">Обратная связь</string>
+    <string name="button_share">Сохранить или отправить</string>
+    <string name="button_send_feedback">Отправить</string>
+
+    <string name="dialog_cvc_title">Введите секретный код CVC/CVV, расположенный на обратной стороне карты</string>
+
+    <string name="feedback_title">Обращение в техподдержку</string>
+    <string name="feedback_title_for_receipt">Обращение в техподдержку по переводу №%1$s от %2$s</string>
+    <string name="feedback_email">EMAIL ДЛЯ ОТВЕТА</string>
+    <string name="feedback_message">СООБЩЕНИЕ</string>
+    <string name="feedback_successfully_sent">"Спасибо! Ваше сообщение отправлено."</string>
+
+    <string name="go_to_site">Перейти на сайт</string>
+
+    <string name="settings_rules">Правила использования</string>
+    <string name="settings_rates">Тарифы</string>
+
+    <string name="error_occurred">Произошла ошибка</string>
+    <string name="error_get_commission">Не удалось обновить комиссию</string>
+</resources>

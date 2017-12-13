@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EBEBF1</color>
+    <color name="colorPrimaryDark">#374653</color>
+    <color name="colorAccent">#FED100</color>
+    <color name="colorPrimaryRipple">#42757a93</color>
+
+    <color name="colorBackground">#EFEFF4</color>
+
+    <drawable name="touchFeedback">#CFD8DC</drawable>
+</resources>

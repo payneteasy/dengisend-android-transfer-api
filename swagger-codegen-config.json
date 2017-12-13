@@ -1,0 +1,12 @@
+{
+  "groupId":"com.payneteasy",
+  "artifactId":"android",
+  "artifactVersion":"0.1",
+  "library":"okhttp-gson",
+  "apiPackage": "com.payneteasy.android.api",
+  "modelPackage": "com.payneteasy.android.model",
+  "sourceFolder": "src/main/java",
+  "interfaceOnly": true,
+  "hideGenerationTimestamp": true,
+  "supportingFiles": "StringUtil.java"
+}
