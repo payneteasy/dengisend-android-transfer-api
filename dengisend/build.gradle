@@ -5,7 +5,7 @@ targetCompatibility = 1.7
 
 ext {
     oltu_version = "1.0.1"
-    retrofit_version = "2.0.2"
+    retrofit_version = "2.5.0"
     swagger_annotations_version = "1.5.15"
     junit_version = "4.12"
     jodatime_version = "2.9.9"
@@ -13,19 +13,19 @@ ext {
 }
 
 dependencies {
-    compile fileTree(dir: '../vendor-libs', include: ['*.jar'])
+    implementation fileTree(dir: '../vendor-libs', include: ['*.jar'])
 
-    compile "com.squareup.retrofit2:converter-scalars:$retrofit_version"
-    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    compile "io.swagger:swagger-annotations:$swagger_annotations_version"
-    compile "com.squareup.okhttp:okhttp:$okhttp_version"
-    compile "com.squareup.okhttp:logging-interceptor:$okhttp_version"
-    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
-    compile 'com.google.code.gson:gson:2.8.1'
+    implementation "io.swagger:swagger-annotations:$swagger_annotations_version"
+    implementation "com.squareup.okhttp:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation 'com.google.code.gson:gson:2.8.5'
 
-    compile "joda-time:joda-time:$jodatime_version"
+    implementation "joda-time:joda-time:$jodatime_version"
 
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
 }
