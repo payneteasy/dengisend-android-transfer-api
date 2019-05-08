@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.owasp:dependency-check-gradle:5.0.0-M2"
+        classpath "org.owasp:dependency-check-gradle:5.0.0-M3.1"
     }
 }
 
@@ -47,7 +47,7 @@ android {
             applicationIdSuffix = ".dengisend"
         }
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.3'
 }
 
 android.applicationVariants.all { variant ->
