@@ -1,4 +1,3 @@
-
 # SendFeedbackRequest
 
 ## Properties
@@ -8,6 +7,3 @@ Name | Type | Description | Notes
 **email** | **String** |  |  [optional]
 **orderId** | **String** |  |  [optional]
 **session** | [**Session**](Session.md) |  |  [optional]
-
-
-

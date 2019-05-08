@@ -1,4 +1,3 @@
-
 # PerformTransferRequest
 
 ## Properties
@@ -9,6 +8,3 @@ Name | Type | Description | Notes
 **destinationOfFunds** | [**DestinationOfFunds**](DestinationOfFunds.md) |  | 
 **transaction** | [**Transaction**](Transaction.md) |  | 
 **session** | [**Session**](Session.md) |  | 
-
-
-

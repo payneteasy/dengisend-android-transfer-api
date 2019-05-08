@@ -1,4 +1,3 @@
-
 # TransferStatusResponse
 
 ## Properties
@@ -17,7 +16,6 @@ Name | Type | Description | Notes
 **secure3DAuthStatus** | [**Secure3DAuthStatusEnum**](#Secure3DAuthStatusEnum) | 3D authentication status |  [optional]
 **randomSumAuthStatus** | [**RandomSumAuthStatusEnum**](#RandomSumAuthStatusEnum) | Random sum authentication status |  [optional]
 
-
 <a name="StateEnum"></a>
 ## Enum: StateEnum
 Name | Value
@@ -26,7 +24,6 @@ PROCESSING | &quot;PROCESSING&quot;
 REDIRECT_REQUEST | &quot;REDIRECT_REQUEST&quot;
 APPROVED | &quot;APPROVED&quot;
 DECLINED | &quot;DECLINED&quot;
-
 
 <a name="Secure3DAuthStatusEnum"></a>
 ## Enum: Secure3DAuthStatusEnum
@@ -37,13 +34,9 @@ NOT_AUTHENTICATED | &quot;NOT_AUTHENTICATED&quot;
 UNSUPPORTED | &quot;UNSUPPORTED&quot;
 DECLINED | &quot;DECLINED&quot;
 
-
 <a name="RandomSumAuthStatusEnum"></a>
 ## Enum: RandomSumAuthStatusEnum
 Name | Value
 ---- | -----
 AUTHENTICATED | &quot;AUTHENTICATED&quot;
 NOT_AUTHENTICATED | &quot;NOT_AUTHENTICATED&quot;
-
-
-

@@ -46,6 +46,29 @@ paths:
           description: Server error
           schema:
             $ref: '#/definitions/ErrorResponse'
+  /config/get-commission:
+    post:
+      summary: Get transaction commission
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: sessionData
+        description: Session info
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CommissionRequest'
+      responses:
+        '200':
+          description: Commission
+          schema:
+            $ref: '#/definitions/CommissionResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
   /transfer/initiate-transfer:
     post:
       consumes:
@@ -206,6 +229,33 @@ paths:
           description: Server error
           schema:
             $ref: '#/definitions/ErrorResponse'
+  /contacts/status:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: send feedback to support
+      parameters:
+      - name: contactsStatusRequest
+        in: body
+        description: Account data to check
+        required: true
+        schema:
+          $ref: '#/definitions/ContactsStatusRequest'
+      responses:
+        '200':
+          description: Contacts sync status response
+          schema:
+            $ref: '#/definitions/ContactsStatusResponse'
+        '400':
+          description: Request data is invalid
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
 definitions:
   Session:
     type: object
@@ -249,6 +299,24 @@ definitions:
   Transaction:
     type: object
     properties:
+      type:
+        type: string
+        description: Transaction type
+        defaultValue: internal
+        required: false
+        enum:
+          - internal
+          - international
+      fromBin:
+        type: integer
+        format: int32
+        required: false
+        description: The Source card BIN
+      toBin:
+        type: integer
+        format: int32
+        required: false
+        description: The Destination card BIN
       endpointId:
         type: string
         description: Entry point identifier for transfer transaction
@@ -412,17 +480,32 @@ definitions:
         format: double
         description: Maximum transfer amount
       error:
-        type: object
-        properties:
-          cause:
-            type: string
-            description: the cause of the error
-          code:
-            type: string
-            description: The unique error code
-          message:
-            type: string
-            description: the description of the error
+        $ref: '#/definitions/Error'
+  CommissionRequest:
+    type: object
+    required:
+    - session
+    - consumer
+    properties:
+      session:
+        $ref: '#/definitions/Session'
+      consumer:
+        $ref: '#/definitions/Consumer'
+      transaction:
+        $ref: '#/definitions/Transaction'
+  CommissionResponse:
+    type: object
+    properties:
+      commissionCentis:
+        type: integer
+        format: int64
+        description: Commission amount, 1.00 EUR = 100 centis
+      currency:
+        type: string
+        pattern: ^[A-Z]{3}$
+        description: Transaction currency, upper case letters (ISO 4217 alpha code)
+      error:
+        $ref: '#/definitions/Error'
   InitiateTransferRequest:
     type: object
     required:
@@ -588,6 +671,22 @@ definitions:
   SendFeedbackResponse:
     type: object
     properties:
+      error:
+        $ref: '#/definitions/Error'
+  ContactsStatusRequest:
+    type: object
+    properties:
+      account:
+        type: string
+  ContactsStatusResponse:
+    type: object
+    properties:
+      status:
+        type: string
+        enum:
+        - SYNCED
+        - SYNC_NEEDED
+        - ACCOUNT_NOT_FOUND
       error:
         $ref: '#/definitions/Error'
   ErrorResponse:

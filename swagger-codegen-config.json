@@ -2,11 +2,12 @@
   "groupId":"com.payneteasy",
   "artifactId":"android",
   "artifactVersion":"0.1",
-  "library":"okhttp-gson",
+  "library":"retrofit2",
   "apiPackage": "com.payneteasy.android.api",
   "modelPackage": "com.payneteasy.android.model",
   "sourceFolder": "src/main/java",
   "interfaceOnly": true,
   "hideGenerationTimestamp": true,
-  "supportingFiles": "StringUtil.java"
+  "supportingFiles": "StringUtil.java",
+  "dateLibrary": "threetenbp"
 }

@@ -1,17 +1,18 @@
 # DefaultApi
 
-All URIs are relative to *https://localhost*
+All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**authBankIdRequestAccessTokenGet**](DefaultApi.md#authBankIdRequestAccessTokenGet) | **GET** /auth/{bank_id}/request-access-token | Generate access token for transfer operation
-[**cardrefsInvoiceIdGetClientIdsPost**](DefaultApi.md#cardrefsInvoiceIdGetClientIdsPost) | **POST** /cardrefs/{invoiceId}/get-client-ids | Fetch source and destination cards ids
-[**configGetRatePost**](DefaultApi.md#configGetRatePost) | **POST** /config/get-rate | Get transfer rates and limits configuration
-[**supportSendMessagePost**](DefaultApi.md#supportSendMessagePost) | **POST** /support/send-message | send feedback to support
-[**transferEndpointIdInvoiceIdPost**](DefaultApi.md#transferEndpointIdInvoiceIdPost) | **POST** /transfer/{endpointId}/{invoiceId} | Perform transfer request
-[**transferEndpointIdInvoiceIdStatusPost**](DefaultApi.md#transferEndpointIdInvoiceIdStatusPost) | **POST** /transfer/{endpointId}/{invoiceId}/status | Get funds transfer status
-[**transferInitiateTransferPost**](DefaultApi.md#transferInitiateTransferPost) | **POST** /transfer/initiate-transfer | Initiate transfer request
-
+[**authBankIdRequestAccessTokenGet**](DefaultApi.md#authBankIdRequestAccessTokenGet) | **GET** auth/{bank_id}/request-access-token | Generate access token for transfer operation
+[**cardrefsInvoiceIdGetClientIdsPost**](DefaultApi.md#cardrefsInvoiceIdGetClientIdsPost) | **POST** cardrefs/{invoiceId}/get-client-ids | Fetch source and destination cards ids
+[**configGetCommissionPost**](DefaultApi.md#configGetCommissionPost) | **POST** config/get-commission | Get transaction commission
+[**configGetRatePost**](DefaultApi.md#configGetRatePost) | **POST** config/get-rate | Get transfer rates and limits configuration
+[**contactsStatusPost**](DefaultApi.md#contactsStatusPost) | **POST** contacts/status | send feedback to support
+[**supportSendMessagePost**](DefaultApi.md#supportSendMessagePost) | **POST** support/send-message | send feedback to support
+[**transferEndpointIdInvoiceIdPost**](DefaultApi.md#transferEndpointIdInvoiceIdPost) | **POST** transfer/{endpointId}/{invoiceId} | Perform transfer request
+[**transferEndpointIdInvoiceIdStatusPost**](DefaultApi.md#transferEndpointIdInvoiceIdStatusPost) | **POST** transfer/{endpointId}/{invoiceId}/status | Get funds transfer status
+[**transferInitiateTransferPost**](DefaultApi.md#transferInitiateTransferPost) | **POST** transfer/initiate-transfer | Initiate transfer request
 
 <a name="authBankIdRequestAccessTokenGet"></a>
 # **authBankIdRequestAccessTokenGet**
@@ -58,7 +59,7 @@ No authorization required
 
 <a name="cardrefsInvoiceIdGetClientIdsPost"></a>
 # **cardrefsInvoiceIdGetClientIdsPost**
-> CardsIdsResponse cardrefsInvoiceIdGetClientIdsPost(invoiceId, performTransferRequestData)
+> CardsIdsResponse cardrefsInvoiceIdGetClientIdsPost(body, invoiceId)
 
 Fetch source and destination cards ids
 
@@ -70,10 +71,10 @@ Fetch source and destination cards ids
 
 
 DefaultApi apiInstance = new DefaultApi();
+CardsIdsRequest body = new CardsIdsRequest(); // CardsIdsRequest | transfer data
 String invoiceId = "invoiceId_example"; // String | Transfer transaction identifier
-CardsIdsRequest performTransferRequestData = new CardsIdsRequest(); // CardsIdsRequest | transfer data
 try {
-    CardsIdsResponse result = apiInstance.cardrefsInvoiceIdGetClientIdsPost(invoiceId, performTransferRequestData);
+    CardsIdsResponse result = apiInstance.cardrefsInvoiceIdGetClientIdsPost(body, invoiceId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#cardrefsInvoiceIdGetClientIdsPost");
@@ -85,8 +86,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **body** | [**CardsIdsRequest**](CardsIdsRequest.md)| transfer data |
  **invoiceId** | **String**| Transfer transaction identifier |
- **performTransferRequestData** | [**CardsIdsRequest**](CardsIdsRequest.md)| transfer data |
 
 ### Return type
 
@@ -101,9 +102,52 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="configGetCommissionPost"></a>
+# **configGetCommissionPost**
+> CommissionResponse configGetCommissionPost(body)
+
+Get transaction commission
+
+### Example
+```java
+// Import classes:
+//import com.payneteasy.android.ApiException;
+//import com.payneteasy.android.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+CommissionRequest body = new CommissionRequest(); // CommissionRequest | Session info
+try {
+    CommissionResponse result = apiInstance.configGetCommissionPost(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#configGetCommissionPost");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**CommissionRequest**](CommissionRequest.md)| Session info |
+
+### Return type
+
+[**CommissionResponse**](CommissionResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="configGetRatePost"></a>
 # **configGetRatePost**
-> RatesResponse configGetRatePost(sessionData)
+> RatesResponse configGetRatePost(body)
 
 Get transfer rates and limits configuration
 
@@ -115,9 +159,9 @@ Get transfer rates and limits configuration
 
 
 DefaultApi apiInstance = new DefaultApi();
-RatesRequest sessionData = new RatesRequest(); // RatesRequest | Session info
+RatesRequest body = new RatesRequest(); // RatesRequest | Session info
 try {
-    RatesResponse result = apiInstance.configGetRatePost(sessionData);
+    RatesResponse result = apiInstance.configGetRatePost(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#configGetRatePost");
@@ -129,7 +173,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sessionData** | [**RatesRequest**](RatesRequest.md)| Session info |
+ **body** | [**RatesRequest**](RatesRequest.md)| Session info |
 
 ### Return type
 
@@ -144,9 +188,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="supportSendMessagePost"></a>
-# **supportSendMessagePost**
-> SendFeedbackResponse supportSendMessagePost(sendFeedbackRequest)
+<a name="contactsStatusPost"></a>
+# **contactsStatusPost**
+> ContactsStatusResponse contactsStatusPost(body)
 
 send feedback to support
 
@@ -158,9 +202,52 @@ send feedback to support
 
 
 DefaultApi apiInstance = new DefaultApi();
-SendFeedbackRequest sendFeedbackRequest = new SendFeedbackRequest(); // SendFeedbackRequest | Transfer data to check
+ContactsStatusRequest body = new ContactsStatusRequest(); // ContactsStatusRequest | Account data to check
 try {
-    SendFeedbackResponse result = apiInstance.supportSendMessagePost(sendFeedbackRequest);
+    ContactsStatusResponse result = apiInstance.contactsStatusPost(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#contactsStatusPost");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ContactsStatusRequest**](ContactsStatusRequest.md)| Account data to check |
+
+### Return type
+
+[**ContactsStatusResponse**](ContactsStatusResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="supportSendMessagePost"></a>
+# **supportSendMessagePost**
+> SendFeedbackResponse supportSendMessagePost(body)
+
+send feedback to support
+
+### Example
+```java
+// Import classes:
+//import com.payneteasy.android.ApiException;
+//import com.payneteasy.android.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+SendFeedbackRequest body = new SendFeedbackRequest(); // SendFeedbackRequest | Transfer data to check
+try {
+    SendFeedbackResponse result = apiInstance.supportSendMessagePost(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#supportSendMessagePost");
@@ -172,7 +259,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sendFeedbackRequest** | [**SendFeedbackRequest**](SendFeedbackRequest.md)| Transfer data to check |
+ **body** | [**SendFeedbackRequest**](SendFeedbackRequest.md)| Transfer data to check |
 
 ### Return type
 
@@ -189,7 +276,7 @@ No authorization required
 
 <a name="transferEndpointIdInvoiceIdPost"></a>
 # **transferEndpointIdInvoiceIdPost**
-> PerformTransferResponse transferEndpointIdInvoiceIdPost(endpointId, invoiceId, performTransferRequestData)
+> PerformTransferResponse transferEndpointIdInvoiceIdPost(body, endpointId, invoiceId)
 
 Perform transfer request
 
@@ -201,11 +288,11 @@ Perform transfer request
 
 
 DefaultApi apiInstance = new DefaultApi();
+PerformTransferRequest body = new PerformTransferRequest(); // PerformTransferRequest | transfer data
 String endpointId = "endpointId_example"; // String | Entry point identifier for transfer transaction
 String invoiceId = "invoiceId_example"; // String | Transfer transaction identifier
-PerformTransferRequest performTransferRequestData = new PerformTransferRequest(); // PerformTransferRequest | transfer data
 try {
-    PerformTransferResponse result = apiInstance.transferEndpointIdInvoiceIdPost(endpointId, invoiceId, performTransferRequestData);
+    PerformTransferResponse result = apiInstance.transferEndpointIdInvoiceIdPost(body, endpointId, invoiceId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#transferEndpointIdInvoiceIdPost");
@@ -217,9 +304,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **body** | [**PerformTransferRequest**](PerformTransferRequest.md)| transfer data |
  **endpointId** | **String**| Entry point identifier for transfer transaction |
  **invoiceId** | **String**| Transfer transaction identifier |
- **performTransferRequestData** | [**PerformTransferRequest**](PerformTransferRequest.md)| transfer data |
 
 ### Return type
 
@@ -236,7 +323,7 @@ No authorization required
 
 <a name="transferEndpointIdInvoiceIdStatusPost"></a>
 # **transferEndpointIdInvoiceIdStatusPost**
-> TransferStatusResponse transferEndpointIdInvoiceIdStatusPost(endpointId, invoiceId, transferStatusRequest)
+> TransferStatusResponse transferEndpointIdInvoiceIdStatusPost(body, endpointId, invoiceId)
 
 Get funds transfer status
 
@@ -248,11 +335,11 @@ Get funds transfer status
 
 
 DefaultApi apiInstance = new DefaultApi();
+TransferStatusRequest body = new TransferStatusRequest(); // TransferStatusRequest | Transfer data to check
 String endpointId = "endpointId_example"; // String | Entry point identifier for transfer transaction
 String invoiceId = "invoiceId_example"; // String | Transfer transaction identifier
-TransferStatusRequest transferStatusRequest = new TransferStatusRequest(); // TransferStatusRequest | Transfer data to check
 try {
-    TransferStatusResponse result = apiInstance.transferEndpointIdInvoiceIdStatusPost(endpointId, invoiceId, transferStatusRequest);
+    TransferStatusResponse result = apiInstance.transferEndpointIdInvoiceIdStatusPost(body, endpointId, invoiceId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#transferEndpointIdInvoiceIdStatusPost");
@@ -264,9 +351,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **body** | [**TransferStatusRequest**](TransferStatusRequest.md)| Transfer data to check |
  **endpointId** | **String**| Entry point identifier for transfer transaction |
  **invoiceId** | **String**| Transfer transaction identifier |
- **transferStatusRequest** | [**TransferStatusRequest**](TransferStatusRequest.md)| Transfer data to check |
 
 ### Return type
 
@@ -283,7 +370,7 @@ No authorization required
 
 <a name="transferInitiateTransferPost"></a>
 # **transferInitiateTransferPost**
-> InitiateTransferResponse transferInitiateTransferPost(initiateTransferData)
+> InitiateTransferResponse transferInitiateTransferPost(body)
 
 Initiate transfer request
 
@@ -295,9 +382,9 @@ Initiate transfer request
 
 
 DefaultApi apiInstance = new DefaultApi();
-InitiateTransferRequest initiateTransferData = new InitiateTransferRequest(); // InitiateTransferRequest | Device info, location data, session info, amount
+InitiateTransferRequest body = new InitiateTransferRequest(); // InitiateTransferRequest | Device info, location data, session info, amount
 try {
-    InitiateTransferResponse result = apiInstance.transferInitiateTransferPost(initiateTransferData);
+    InitiateTransferResponse result = apiInstance.transferInitiateTransferPost(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#transferInitiateTransferPost");
@@ -309,7 +396,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **initiateTransferData** | [**InitiateTransferRequest**](InitiateTransferRequest.md)| Device info, location data, session info, amount |
+ **body** | [**InitiateTransferRequest**](InitiateTransferRequest.md)| Device info, location data, session info, amount |
 
 ### Return type
 

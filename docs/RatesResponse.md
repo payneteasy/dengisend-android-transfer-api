@@ -1,4 +1,3 @@
-
 # RatesResponse
 
 ## Properties
@@ -9,7 +8,4 @@ Name | Type | Description | Notes
 **rateMax** | **Double** | Maximum commission amount |  [optional]
 **limitMin** | **Double** | Minimum transfer amount |  [optional]
 **limitMax** | **Double** | Maximum transfer amount |  [optional]
-**error** | [**RatesResponseError**](RatesResponseError.md) |  |  [optional]
-
-
-
+**error** | [**Error**](Error.md) |  |  [optional]
