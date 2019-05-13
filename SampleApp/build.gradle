@@ -50,6 +50,10 @@ android {
     buildToolsVersion '28.0.3'
 }
 
+dependencyCheck {
+    format='XML'
+}
+
 android.applicationVariants.all { variant ->
     variant.buildConfigField "String", "BANK_ID", "\"" + banksMap[variant.productFlavors.get(0).name] + "\""
 }

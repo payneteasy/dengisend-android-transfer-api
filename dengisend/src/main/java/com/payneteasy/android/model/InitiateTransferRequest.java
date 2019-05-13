@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,100 +18,101 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Consumer;
+import com.payneteasy.android.model.Session;
+import com.payneteasy.android.model.Transaction;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * InitiateTransferRequest
  */
 
 public class InitiateTransferRequest {
+
   @SerializedName("consumer")
   private Consumer consumer = null;
 
   @SerializedName("location")
-  private InitiateTransferRequestLocation location = null;
+  private Object location = null;
 
   @SerializedName("session")
   private Session session = null;
 
   @SerializedName("transaction")
   private Transaction transaction = null;
-
   public InitiateTransferRequest consumer(Consumer consumer) {
     this.consumer = consumer;
     return this;
   }
 
-   /**
-   * Get consumer
-   * @return consumer
+  
+
+  /**
+  * Get consumer
+  * @return consumer
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Consumer getConsumer() {
     return consumer;
   }
-
   public void setConsumer(Consumer consumer) {
     this.consumer = consumer;
   }
-
-  public InitiateTransferRequest location(InitiateTransferRequestLocation location) {
+  public InitiateTransferRequest location(Object location) {
     this.location = location;
     return this;
   }
 
-   /**
-   * Get location
-   * @return location
+  
+
+  /**
+  * Get location
+  * @return location
   **/
-  @ApiModelProperty(value = "")
-  public InitiateTransferRequestLocation getLocation() {
+  @Schema(description = "")
+  public Object getLocation() {
     return location;
   }
-
-  public void setLocation(InitiateTransferRequestLocation location) {
+  public void setLocation(Object location) {
     this.location = location;
   }
-
   public InitiateTransferRequest session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
   public InitiateTransferRequest transaction(Transaction transaction) {
     this.transaction = transaction;
     return this;
   }
 
-   /**
-   * Get transaction
-   * @return transaction
+  
+
+  /**
+  * Get transaction
+  * @return transaction
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Transaction getTransaction() {
     return transaction;
   }
-
   public void setTransaction(Transaction transaction) {
     this.transaction = transaction;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -130,9 +130,8 @@ public class InitiateTransferRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(consumer, location, session, transaction);
+    return java.util.Objects.hash(consumer, location, session, transaction);
   }
-
 
   @Override
   public String toString() {
@@ -157,6 +156,5 @@ public class InitiateTransferRequest {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

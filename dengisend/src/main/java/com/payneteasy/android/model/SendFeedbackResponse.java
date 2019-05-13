@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,37 +18,36 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Error;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * SendFeedbackResponse
  */
 
 public class SendFeedbackResponse {
+
   @SerializedName("error")
   private Error error = null;
-
   public SendFeedbackResponse error(Error error) {
     this.error = error;
     return this;
   }
 
-   /**
-   * Get error
-   * @return error
+  
+
+  /**
+  * Get error
+  * @return error
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Error getError() {
     return error;
   }
-
   public void setError(Error error) {
     this.error = error;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -64,9 +62,8 @@ public class SendFeedbackResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(error);
+    return java.util.Objects.hash(error);
   }
-
 
   @Override
   public String toString() {
@@ -88,6 +85,5 @@ public class SendFeedbackResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

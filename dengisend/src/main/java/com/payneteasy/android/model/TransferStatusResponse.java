@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,9 +18,10 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Error;
+import com.payneteasy.android.model.Session;
+import com.payneteasy.android.model.Transaction;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 
 /**
@@ -29,6 +29,7 @@ import java.io.IOException;
  */
 
 public class TransferStatusResponse {
+
   @SerializedName("bankOrderId")
   private String bankOrderId = null;
 
@@ -43,18 +44,14 @@ public class TransferStatusResponse {
 
   @SerializedName("session")
   private Session session = null;
-
   /**
    * The state of the transfer
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
     PROCESSING("PROCESSING"),
-    
     REDIRECT_REQUEST("REDIRECT_REQUEST"),
-    
     APPROVED("APPROVED"),
-    
     DECLINED("DECLINED");
 
     private String value;
@@ -62,7 +59,6 @@ public class TransferStatusResponse {
     StateEnum(String value) {
       this.value = value;
     }
-
     public String getValue() {
       return value;
     }
@@ -71,7 +67,6 @@ public class TransferStatusResponse {
     public String toString() {
       return String.valueOf(value);
     }
-
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -80,7 +75,6 @@ public class TransferStatusResponse {
       }
       return null;
     }
-
     public static class Adapter extends TypeAdapter<StateEnum> {
       @Override
       public void write(final JsonWriter jsonWriter, final StateEnum enumeration) throws IOException {
@@ -94,7 +88,6 @@ public class TransferStatusResponse {
       }
     }
   }
-
   @SerializedName("state")
   private StateEnum state = null;
 
@@ -109,18 +102,14 @@ public class TransferStatusResponse {
 
   @SerializedName("errorMessage")
   private String errorMessage = null;
-
   /**
    * 3D authentication status
    */
   @JsonAdapter(Secure3DAuthStatusEnum.Adapter.class)
   public enum Secure3DAuthStatusEnum {
     AUTHENTICATED("AUTHENTICATED"),
-    
     NOT_AUTHENTICATED("NOT_AUTHENTICATED"),
-    
     UNSUPPORTED("UNSUPPORTED"),
-    
     DECLINED("DECLINED");
 
     private String value;
@@ -128,7 +117,6 @@ public class TransferStatusResponse {
     Secure3DAuthStatusEnum(String value) {
       this.value = value;
     }
-
     public String getValue() {
       return value;
     }
@@ -137,7 +125,6 @@ public class TransferStatusResponse {
     public String toString() {
       return String.valueOf(value);
     }
-
     public static Secure3DAuthStatusEnum fromValue(String text) {
       for (Secure3DAuthStatusEnum b : Secure3DAuthStatusEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -146,7 +133,6 @@ public class TransferStatusResponse {
       }
       return null;
     }
-
     public static class Adapter extends TypeAdapter<Secure3DAuthStatusEnum> {
       @Override
       public void write(final JsonWriter jsonWriter, final Secure3DAuthStatusEnum enumeration) throws IOException {
@@ -160,17 +146,14 @@ public class TransferStatusResponse {
       }
     }
   }
-
   @SerializedName("secure3DAuthStatus")
   private Secure3DAuthStatusEnum secure3DAuthStatus = null;
-
   /**
    * Random sum authentication status
    */
   @JsonAdapter(RandomSumAuthStatusEnum.Adapter.class)
   public enum RandomSumAuthStatusEnum {
     AUTHENTICATED("AUTHENTICATED"),
-    
     NOT_AUTHENTICATED("NOT_AUTHENTICATED");
 
     private String value;
@@ -178,7 +161,6 @@ public class TransferStatusResponse {
     RandomSumAuthStatusEnum(String value) {
       this.value = value;
     }
-
     public String getValue() {
       return value;
     }
@@ -187,7 +169,6 @@ public class TransferStatusResponse {
     public String toString() {
       return String.valueOf(value);
     }
-
     public static RandomSumAuthStatusEnum fromValue(String text) {
       for (RandomSumAuthStatusEnum b : RandomSumAuthStatusEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -196,7 +177,6 @@ public class TransferStatusResponse {
       }
       return null;
     }
-
     public static class Adapter extends TypeAdapter<RandomSumAuthStatusEnum> {
       @Override
       public void write(final JsonWriter jsonWriter, final RandomSumAuthStatusEnum enumeration) throws IOException {
@@ -210,227 +190,224 @@ public class TransferStatusResponse {
       }
     }
   }
-
   @SerializedName("randomSumAuthStatus")
   private RandomSumAuthStatusEnum randomSumAuthStatus = null;
-
   public TransferStatusResponse bankOrderId(String bankOrderId) {
     this.bankOrderId = bankOrderId;
     return this;
   }
 
-   /**
-   * Required if state is APPROVED or DECLINED
-   * @return bankOrderId
+  
+
+  /**
+  * Required if state is APPROVED or DECLINED
+  * @return bankOrderId
   **/
-  @ApiModelProperty(value = "Required if state is APPROVED or DECLINED")
+  @Schema(description = "Required if state is APPROVED or DECLINED")
   public String getBankOrderId() {
     return bankOrderId;
   }
-
   public void setBankOrderId(String bankOrderId) {
     this.bankOrderId = bankOrderId;
   }
-
   public TransferStatusResponse orderId(String orderId) {
     this.orderId = orderId;
     return this;
   }
 
-   /**
-   * Order identifier in payment processing system
-   * @return orderId
+  
+
+  /**
+  * Order identifier in payment processing system
+  * @return orderId
   **/
-  @ApiModelProperty(value = "Order identifier in payment processing system")
+  @Schema(description = "Order identifier in payment processing system")
   public String getOrderId() {
     return orderId;
   }
-
   public void setOrderId(String orderId) {
     this.orderId = orderId;
   }
-
   public TransferStatusResponse invoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
     return this;
   }
 
-   /**
-   * Transfer transaction identifier
-   * @return invoiceId
+  
+
+  /**
+  * Transfer transaction identifier
+  * @return invoiceId
   **/
-  @ApiModelProperty(value = "Transfer transaction identifier")
+  @Schema(description = "Transfer transaction identifier")
   public String getInvoiceId() {
     return invoiceId;
   }
-
   public void setInvoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
   }
-
   public TransferStatusResponse redirectUrl(String redirectUrl) {
     this.redirectUrl = redirectUrl;
     return this;
   }
 
-   /**
-   * Required if state is REDIRECT_REQUEST
-   * @return redirectUrl
+  
+
+  /**
+  * Required if state is REDIRECT_REQUEST
+  * @return redirectUrl
   **/
-  @ApiModelProperty(value = "Required if state is REDIRECT_REQUEST")
+  @Schema(description = "Required if state is REDIRECT_REQUEST")
   public String getRedirectUrl() {
     return redirectUrl;
   }
-
   public void setRedirectUrl(String redirectUrl) {
     this.redirectUrl = redirectUrl;
   }
-
   public TransferStatusResponse session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
   public TransferStatusResponse state(StateEnum state) {
     this.state = state;
     return this;
   }
 
-   /**
-   * The state of the transfer
-   * @return state
+  
+
+  /**
+  * The state of the transfer
+  * @return state
   **/
-  @ApiModelProperty(value = "The state of the transfer")
+  @Schema(description = "The state of the transfer")
   public StateEnum getState() {
     return state;
   }
-
   public void setState(StateEnum state) {
     this.state = state;
   }
-
   public TransferStatusResponse transaction(Transaction transaction) {
     this.transaction = transaction;
     return this;
   }
 
-   /**
-   * Get transaction
-   * @return transaction
+  
+
+  /**
+  * Get transaction
+  * @return transaction
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Transaction getTransaction() {
     return transaction;
   }
-
   public void setTransaction(Transaction transaction) {
     this.transaction = transaction;
   }
-
   public TransferStatusResponse error(Error error) {
     this.error = error;
     return this;
   }
 
-   /**
-   * Get error
-   * @return error
+  
+
+  /**
+  * Get error
+  * @return error
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Error getError() {
     return error;
   }
-
   public void setError(Error error) {
     this.error = error;
   }
-
   public TransferStatusResponse errorCode(Integer errorCode) {
     this.errorCode = errorCode;
     return this;
   }
 
-   /**
-   * Decline reason code, may present if state is DECLINED
-   * @return errorCode
+  
+
+  /**
+  * Decline reason code, may present if state is DECLINED
+  * @return errorCode
   **/
-  @ApiModelProperty(value = "Decline reason code, may present if state is DECLINED")
+  @Schema(description = "Decline reason code, may present if state is DECLINED")
   public Integer getErrorCode() {
     return errorCode;
   }
-
   public void setErrorCode(Integer errorCode) {
     this.errorCode = errorCode;
   }
-
   public TransferStatusResponse errorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
     return this;
   }
 
-   /**
-   * Decline reason message, may present if state is DECLINED
-   * @return errorMessage
+  
+
+  /**
+  * Decline reason message, may present if state is DECLINED
+  * @return errorMessage
   **/
-  @ApiModelProperty(value = "Decline reason message, may present if state is DECLINED")
+  @Schema(description = "Decline reason message, may present if state is DECLINED")
   public String getErrorMessage() {
     return errorMessage;
   }
-
   public void setErrorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
   }
-
   public TransferStatusResponse secure3DAuthStatus(Secure3DAuthStatusEnum secure3DAuthStatus) {
     this.secure3DAuthStatus = secure3DAuthStatus;
     return this;
   }
 
-   /**
-   * 3D authentication status
-   * @return secure3DAuthStatus
+  
+
+  /**
+  * 3D authentication status
+  * @return secure3DAuthStatus
   **/
-  @ApiModelProperty(value = "3D authentication status")
+  @Schema(description = "3D authentication status")
   public Secure3DAuthStatusEnum getSecure3DAuthStatus() {
     return secure3DAuthStatus;
   }
-
   public void setSecure3DAuthStatus(Secure3DAuthStatusEnum secure3DAuthStatus) {
     this.secure3DAuthStatus = secure3DAuthStatus;
   }
-
   public TransferStatusResponse randomSumAuthStatus(RandomSumAuthStatusEnum randomSumAuthStatus) {
     this.randomSumAuthStatus = randomSumAuthStatus;
     return this;
   }
 
-   /**
-   * Random sum authentication status
-   * @return randomSumAuthStatus
+  
+
+  /**
+  * Random sum authentication status
+  * @return randomSumAuthStatus
   **/
-  @ApiModelProperty(value = "Random sum authentication status")
+  @Schema(description = "Random sum authentication status")
   public RandomSumAuthStatusEnum getRandomSumAuthStatus() {
     return randomSumAuthStatus;
   }
-
   public void setRandomSumAuthStatus(RandomSumAuthStatusEnum randomSumAuthStatus) {
     this.randomSumAuthStatus = randomSumAuthStatus;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -456,9 +433,8 @@ public class TransferStatusResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(bankOrderId, orderId, invoiceId, redirectUrl, session, state, transaction, error, errorCode, errorMessage, secure3DAuthStatus, randomSumAuthStatus);
+    return java.util.Objects.hash(bankOrderId, orderId, invoiceId, redirectUrl, session, state, transaction, error, errorCode, errorMessage, secure3DAuthStatus, randomSumAuthStatus);
   }
-
 
   @Override
   public String toString() {
@@ -491,6 +467,5 @@ public class TransferStatusResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

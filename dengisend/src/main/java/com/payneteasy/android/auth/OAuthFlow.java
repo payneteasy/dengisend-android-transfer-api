@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.auth;
 
 public enum OAuthFlow {

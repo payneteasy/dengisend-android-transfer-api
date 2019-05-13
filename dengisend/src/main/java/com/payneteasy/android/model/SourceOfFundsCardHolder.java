@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,57 +18,56 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * SourceOfFundsCardHolder
  */
 
 public class SourceOfFundsCardHolder {
+
   @SerializedName("firstName")
   private String firstName = null;
 
   @SerializedName("lastName")
   private String lastName = null;
-
   public SourceOfFundsCardHolder firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
 
-   /**
-   * Cardholder’s first name
-   * @return firstName
+  
+
+  /**
+  * Cardholder’s first name
+  * @return firstName
   **/
-  @ApiModelProperty(required = true, value = "Cardholder’s first name")
+  @Schema(required = true, description = "Cardholder’s first name")
   public String getFirstName() {
     return firstName;
   }
-
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
-
   public SourceOfFundsCardHolder lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
 
-   /**
-   * Cardholder’s last name
-   * @return lastName
+  
+
+  /**
+  * Cardholder’s last name
+  * @return lastName
   **/
-  @ApiModelProperty(required = true, value = "Cardholder’s last name")
+  @Schema(required = true, description = "Cardholder’s last name")
   public String getLastName() {
     return lastName;
   }
-
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -85,9 +83,8 @@ public class SourceOfFundsCardHolder {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName);
+    return java.util.Objects.hash(firstName, lastName);
   }
-
 
   @Override
   public String toString() {
@@ -110,6 +107,5 @@ public class SourceOfFundsCardHolder {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

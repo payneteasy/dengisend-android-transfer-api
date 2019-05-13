@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,8 +18,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 
 /**
@@ -34,21 +32,13 @@ public class Error {
   @JsonAdapter(CauseEnum.Adapter.class)
   public enum CauseEnum {
     FILTERED("FILTERED"),
-    
     DECLINED("DECLINED"),
-    
     INVALID_CONFIGURATION("INVALID_CONFIGURATION"),
-    
     INVALID_REQUEST("INVALID_REQUEST"),
-    
     INTERNAL_ERROR("INTERNAL_ERROR"),
-    
     PROCESSING_FAILED("PROCESSING_FAILED"),
-    
     SERVER_FAILED("SERVER_FAILED"),
-    
     SERVER_UNAVAILABLE("SERVER_UNAVAILABLE"),
-    
     ORDER_NOT_FOUND("ORDER_NOT_FOUND");
 
     private String value;
@@ -56,7 +46,6 @@ public class Error {
     CauseEnum(String value) {
       this.value = value;
     }
-
     public String getValue() {
       return value;
     }
@@ -65,7 +54,6 @@ public class Error {
     public String toString() {
       return String.valueOf(value);
     }
-
     public static CauseEnum fromValue(String text) {
       for (CauseEnum b : CauseEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -74,7 +62,6 @@ public class Error {
       }
       return null;
     }
-
     public static class Adapter extends TypeAdapter<CauseEnum> {
       @Override
       public void write(final JsonWriter jsonWriter, final CauseEnum enumeration) throws IOException {
@@ -88,7 +75,6 @@ public class Error {
       }
     }
   }
-
   @SerializedName("cause")
   private CauseEnum cause = null;
 
@@ -97,62 +83,60 @@ public class Error {
 
   @SerializedName("message")
   private String message = null;
-
   public Error cause(CauseEnum cause) {
     this.cause = cause;
     return this;
   }
 
-   /**
-   * The cause of the error
-   * @return cause
+  
+
+  /**
+  * The cause of the error
+  * @return cause
   **/
-  @ApiModelProperty(value = "The cause of the error")
+  @Schema(description = "The cause of the error")
   public CauseEnum getCause() {
     return cause;
   }
-
   public void setCause(CauseEnum cause) {
     this.cause = cause;
   }
-
   public Error code(String code) {
     this.code = code;
     return this;
   }
 
-   /**
-   * The unique error code
-   * @return code
+  
+
+  /**
+  * The unique error code
+  * @return code
   **/
-  @ApiModelProperty(value = "The unique error code")
+  @Schema(description = "The unique error code")
   public String getCode() {
     return code;
   }
-
   public void setCode(String code) {
     this.code = code;
   }
-
   public Error message(String message) {
     this.message = message;
     return this;
   }
 
-   /**
-   * the description of the error
-   * @return message
+  
+
+  /**
+  * the description of the error
+  * @return message
   **/
-  @ApiModelProperty(value = "the description of the error")
+  @Schema(description = "the description of the error")
   public String getMessage() {
     return message;
   }
-
   public void setMessage(String message) {
     this.message = message;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -169,9 +153,8 @@ public class Error {
 
   @Override
   public int hashCode() {
-    return Objects.hash(cause, code, message);
+    return java.util.Objects.hash(cause, code, message);
   }
-
 
   @Override
   public String toString() {
@@ -195,6 +178,5 @@ public class Error {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

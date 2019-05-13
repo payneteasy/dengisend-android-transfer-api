@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,15 +18,16 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Session;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * SendFeedbackRequest
  */
 
 public class SendFeedbackRequest {
+
   @SerializedName("message")
   private String message = null;
 
@@ -39,80 +39,78 @@ public class SendFeedbackRequest {
 
   @SerializedName("session")
   private Session session = null;
-
   public SendFeedbackRequest message(String message) {
     this.message = message;
     return this;
   }
 
-   /**
-   * Get message
-   * @return message
+  
+
+  /**
+  * Get message
+  * @return message
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public String getMessage() {
     return message;
   }
-
   public void setMessage(String message) {
     this.message = message;
   }
-
   public SendFeedbackRequest email(String email) {
     this.email = email;
     return this;
   }
 
-   /**
-   * Get email
-   * @return email
+  
+
+  /**
+  * Get email
+  * @return email
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public String getEmail() {
     return email;
   }
-
   public void setEmail(String email) {
     this.email = email;
   }
-
   public SendFeedbackRequest orderId(String orderId) {
     this.orderId = orderId;
     return this;
   }
 
-   /**
-   * Get orderId
-   * @return orderId
+  
+
+  /**
+  * Get orderId
+  * @return orderId
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public String getOrderId() {
     return orderId;
   }
-
   public void setOrderId(String orderId) {
     this.orderId = orderId;
   }
-
   public SendFeedbackRequest session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -130,9 +128,8 @@ public class SendFeedbackRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(message, email, orderId, session);
+    return java.util.Objects.hash(message, email, orderId, session);
   }
-
 
   @Override
   public String toString() {
@@ -157,6 +154,5 @@ public class SendFeedbackRequest {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

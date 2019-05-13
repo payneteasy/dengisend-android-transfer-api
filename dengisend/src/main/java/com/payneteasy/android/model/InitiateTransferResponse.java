@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,15 +18,17 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Error;
+import com.payneteasy.android.model.Session;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * InitiateTransferResponse
  */
 
 public class InitiateTransferResponse {
+
   @SerializedName("endpointId")
   private String endpointId = null;
 
@@ -35,105 +36,103 @@ public class InitiateTransferResponse {
   private String invoiceId = null;
 
   @SerializedName("rates")
-  private InitiateTransferResponseRates rates = null;
+  private Object rates = null;
 
   @SerializedName("session")
   private Session session = null;
 
   @SerializedName("error")
   private Error error = null;
-
   public InitiateTransferResponse endpointId(String endpointId) {
     this.endpointId = endpointId;
     return this;
   }
 
-   /**
-   * Entry point identifier for transfer transaction
-   * @return endpointId
+  
+
+  /**
+  * Entry point identifier for transfer transaction
+  * @return endpointId
   **/
-  @ApiModelProperty(value = "Entry point identifier for transfer transaction")
+  @Schema(description = "Entry point identifier for transfer transaction")
   public String getEndpointId() {
     return endpointId;
   }
-
   public void setEndpointId(String endpointId) {
     this.endpointId = endpointId;
   }
-
   public InitiateTransferResponse invoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
     return this;
   }
 
-   /**
-   * Transfer transaction identifier
-   * @return invoiceId
+  
+
+  /**
+  * Transfer transaction identifier
+  * @return invoiceId
   **/
-  @ApiModelProperty(value = "Transfer transaction identifier")
+  @Schema(description = "Transfer transaction identifier")
   public String getInvoiceId() {
     return invoiceId;
   }
-
   public void setInvoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
   }
-
-  public InitiateTransferResponse rates(InitiateTransferResponseRates rates) {
+  public InitiateTransferResponse rates(Object rates) {
     this.rates = rates;
     return this;
   }
 
-   /**
-   * Get rates
-   * @return rates
+  
+
+  /**
+  * Get rates
+  * @return rates
   **/
-  @ApiModelProperty(value = "")
-  public InitiateTransferResponseRates getRates() {
+  @Schema(description = "")
+  public Object getRates() {
     return rates;
   }
-
-  public void setRates(InitiateTransferResponseRates rates) {
+  public void setRates(Object rates) {
     this.rates = rates;
   }
-
   public InitiateTransferResponse session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
   public InitiateTransferResponse error(Error error) {
     this.error = error;
     return this;
   }
 
-   /**
-   * Get error
-   * @return error
+  
+
+  /**
+  * Get error
+  * @return error
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Error getError() {
     return error;
   }
-
   public void setError(Error error) {
     this.error = error;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -152,9 +151,8 @@ public class InitiateTransferResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(endpointId, invoiceId, rates, session, error);
+    return java.util.Objects.hash(endpointId, invoiceId, rates, session, error);
   }
-
 
   @Override
   public String toString() {
@@ -180,6 +178,5 @@ public class InitiateTransferResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

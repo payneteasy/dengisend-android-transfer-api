@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android;
-
 
 public class StringUtil {
   /**

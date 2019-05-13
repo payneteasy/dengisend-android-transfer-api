@@ -23,56 +23,56 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 
 /**
- * CardsIdsResponse
+ * CommissionResponse
  */
 
-public class CardsIdsResponse {
+public class CommissionResponse {
 
-  @SerializedName("sourceCardRefId")
-  private String sourceCardRefId = null;
+  @SerializedName("commissionCentis")
+  private Long commissionCentis = null;
 
-  @SerializedName("destinationCardRefId")
-  private String destinationCardRefId = null;
+  @SerializedName("currency")
+  private String currency = null;
 
   @SerializedName("error")
   private Error error = null;
-  public CardsIdsResponse sourceCardRefId(String sourceCardRefId) {
-    this.sourceCardRefId = sourceCardRefId;
+  public CommissionResponse commissionCentis(Long commissionCentis) {
+    this.commissionCentis = commissionCentis;
     return this;
   }
 
   
 
   /**
-  * The source card reference identifier (on client side)
-  * @return sourceCardRefId
+  * Commission amount, 1.00 EUR &#x3D; 100 centis
+  * @return commissionCentis
   **/
-  @Schema(description = "The source card reference identifier (on client side)")
-  public String getSourceCardRefId() {
-    return sourceCardRefId;
+  @Schema(description = "Commission amount, 1.00 EUR = 100 centis")
+  public Long getCommissionCentis() {
+    return commissionCentis;
   }
-  public void setSourceCardRefId(String sourceCardRefId) {
-    this.sourceCardRefId = sourceCardRefId;
+  public void setCommissionCentis(Long commissionCentis) {
+    this.commissionCentis = commissionCentis;
   }
-  public CardsIdsResponse destinationCardRefId(String destinationCardRefId) {
-    this.destinationCardRefId = destinationCardRefId;
+  public CommissionResponse currency(String currency) {
+    this.currency = currency;
     return this;
   }
 
   
 
   /**
-  * The destination card reference identifier (on client side)
-  * @return destinationCardRefId
+  * Transaction currency, upper case letters (ISO 4217 alpha code)
+  * @return currency
   **/
-  @Schema(description = "The destination card reference identifier (on client side)")
-  public String getDestinationCardRefId() {
-    return destinationCardRefId;
+  @Schema(description = "Transaction currency, upper case letters (ISO 4217 alpha code)")
+  public String getCurrency() {
+    return currency;
   }
-  public void setDestinationCardRefId(String destinationCardRefId) {
-    this.destinationCardRefId = destinationCardRefId;
+  public void setCurrency(String currency) {
+    this.currency = currency;
   }
-  public CardsIdsResponse error(Error error) {
+  public CommissionResponse error(Error error) {
     this.error = error;
     return this;
   }
@@ -98,24 +98,24 @@ public class CardsIdsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardsIdsResponse cardsIdsResponse = (CardsIdsResponse) o;
-    return Objects.equals(this.sourceCardRefId, cardsIdsResponse.sourceCardRefId) &&
-        Objects.equals(this.destinationCardRefId, cardsIdsResponse.destinationCardRefId) &&
-        Objects.equals(this.error, cardsIdsResponse.error);
+    CommissionResponse commissionResponse = (CommissionResponse) o;
+    return Objects.equals(this.commissionCentis, commissionResponse.commissionCentis) &&
+        Objects.equals(this.currency, commissionResponse.currency) &&
+        Objects.equals(this.error, commissionResponse.error);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(sourceCardRefId, destinationCardRefId, error);
+    return java.util.Objects.hash(commissionCentis, currency, error);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardsIdsResponse {\n");
+    sb.append("class CommissionResponse {\n");
     
-    sb.append("    sourceCardRefId: ").append(toIndentedString(sourceCardRefId)).append("\n");
-    sb.append("    destinationCardRefId: ").append(toIndentedString(destinationCardRefId)).append("\n");
+    sb.append("    commissionCentis: ").append(toIndentedString(commissionCentis)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");
     return sb.toString();

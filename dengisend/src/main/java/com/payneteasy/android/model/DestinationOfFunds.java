@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,59 +18,58 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.DestinationOfFundsCard;
+import com.payneteasy.android.model.DestinationOfFundsReference;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * Only one of these subtypes (card, reference) should be used
  */
-@ApiModel(description = "Only one of these subtypes (card, reference) should be used")
-
+@Schema(description = "Only one of these subtypes (card, reference) should be used")
 public class DestinationOfFunds {
+
   @SerializedName("card")
   private DestinationOfFundsCard card = null;
 
   @SerializedName("reference")
   private DestinationOfFundsReference reference = null;
-
   public DestinationOfFunds card(DestinationOfFundsCard card) {
     this.card = card;
     return this;
   }
 
-   /**
-   * Get card
-   * @return card
+  
+
+  /**
+  * Get card
+  * @return card
   **/
-  @ApiModelProperty(value = "")
+  @Schema(required = true, description = "")
   public DestinationOfFundsCard getCard() {
     return card;
   }
-
   public void setCard(DestinationOfFundsCard card) {
     this.card = card;
   }
-
   public DestinationOfFunds reference(DestinationOfFundsReference reference) {
     this.reference = reference;
     return this;
   }
 
-   /**
-   * Get reference
-   * @return reference
+  
+
+  /**
+  * Get reference
+  * @return reference
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public DestinationOfFundsReference getReference() {
     return reference;
   }
-
   public void setReference(DestinationOfFundsReference reference) {
     this.reference = reference;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -87,9 +85,8 @@ public class DestinationOfFunds {
 
   @Override
   public int hashCode() {
-    return Objects.hash(card, reference);
+    return java.util.Objects.hash(card, reference);
   }
-
 
   @Override
   public String toString() {
@@ -112,6 +109,5 @@ public class DestinationOfFunds {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

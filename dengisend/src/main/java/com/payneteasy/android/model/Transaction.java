@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,14 +18,65 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * Transaction
  */
 
 public class Transaction {
+  /**
+   * Transaction type
+   */
+  @JsonAdapter(TypeEnum.Adapter.class)
+  public enum TypeEnum {
+    INTERNAL("internal"),
+    INTERNATIONAL("international");
+
+    private String value;
+
+    TypeEnum(String value) {
+      this.value = value;
+    }
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+    public static TypeEnum fromValue(String text) {
+      for (TypeEnum b : TypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+    public static class Adapter extends TypeAdapter<TypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public TypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return TypeEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+  @SerializedName("type")
+  private TypeEnum type = null;
+
+  @SerializedName("fromBin")
+  private Integer fromBin = null;
+
+  @SerializedName("toBin")
+  private Integer toBin = null;
+
   @SerializedName("endpointId")
   private String endpointId = null;
 
@@ -47,134 +97,186 @@ public class Transaction {
 
   @SerializedName("transactionCreatedDate")
   private String transactionCreatedDate = null;
+  public Transaction type(TypeEnum type) {
+    this.type = type;
+    return this;
+  }
 
+  
+
+  /**
+  * Transaction type
+  * @return type
+  **/
+  @Schema(description = "Transaction type")
+  public TypeEnum getType() {
+    return type;
+  }
+  public void setType(TypeEnum type) {
+    this.type = type;
+  }
+  public Transaction fromBin(Integer fromBin) {
+    this.fromBin = fromBin;
+    return this;
+  }
+
+  
+
+  /**
+  * The Source card BIN
+  * @return fromBin
+  **/
+  @Schema(description = "The Source card BIN")
+  public Integer getFromBin() {
+    return fromBin;
+  }
+  public void setFromBin(Integer fromBin) {
+    this.fromBin = fromBin;
+  }
+  public Transaction toBin(Integer toBin) {
+    this.toBin = toBin;
+    return this;
+  }
+
+  
+
+  /**
+  * The Destination card BIN
+  * @return toBin
+  **/
+  @Schema(description = "The Destination card BIN")
+  public Integer getToBin() {
+    return toBin;
+  }
+  public void setToBin(Integer toBin) {
+    this.toBin = toBin;
+  }
   public Transaction endpointId(String endpointId) {
     this.endpointId = endpointId;
     return this;
   }
 
-   /**
-   * Entry point identifier for transfer transaction
-   * @return endpointId
+  
+
+  /**
+  * Entry point identifier for transfer transaction
+  * @return endpointId
   **/
-  @ApiModelProperty(value = "Entry point identifier for transfer transaction")
+  @Schema(description = "Entry point identifier for transfer transaction")
   public String getEndpointId() {
     return endpointId;
   }
-
   public void setEndpointId(String endpointId) {
     this.endpointId = endpointId;
   }
-
   public Transaction invoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
     return this;
   }
 
-   /**
-   * Transfer transaction identifier
-   * @return invoiceId
+  
+
+  /**
+  * Transfer transaction identifier
+  * @return invoiceId
   **/
-  @ApiModelProperty(value = "Transfer transaction identifier")
+  @Schema(description = "Transfer transaction identifier")
   public String getInvoiceId() {
     return invoiceId;
   }
-
   public void setInvoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
   }
-
   public Transaction amountCentis(Long amountCentis) {
     this.amountCentis = amountCentis;
     return this;
   }
 
-   /**
-   * Transaction amount, 1.00 EUR &#x3D; 100 centis
-   * @return amountCentis
+  
+
+  /**
+  * Transaction amount, 1.00 EUR &#x3D; 100 centis
+  * @return amountCentis
   **/
-  @ApiModelProperty(value = "Transaction amount, 1.00 EUR = 100 centis")
+  @Schema(description = "Transaction amount, 1.00 EUR = 100 centis")
   public Long getAmountCentis() {
     return amountCentis;
   }
-
   public void setAmountCentis(Long amountCentis) {
     this.amountCentis = amountCentis;
   }
-
   public Transaction commissionCentis(Long commissionCentis) {
     this.commissionCentis = commissionCentis;
     return this;
   }
 
-   /**
-   * Amount of commission held in centis
-   * @return commissionCentis
+  
+
+  /**
+  * Amount of commission held in centis
+  * @return commissionCentis
   **/
-  @ApiModelProperty(value = "Amount of commission held in centis")
+  @Schema(description = "Amount of commission held in centis")
   public Long getCommissionCentis() {
     return commissionCentis;
   }
-
   public void setCommissionCentis(Long commissionCentis) {
     this.commissionCentis = commissionCentis;
   }
-
   public Transaction currency(String currency) {
     this.currency = currency;
     return this;
   }
 
-   /**
-   * Transaction currency, upper case letters (ISO 4217 alpha code)
-   * @return currency
+  
+
+  /**
+  * Transaction currency, upper case letters (ISO 4217 alpha code)
+  * @return currency
   **/
-  @ApiModelProperty(value = "Transaction currency, upper case letters (ISO 4217 alpha code)")
+  @Schema(description = "Transaction currency, upper case letters (ISO 4217 alpha code)")
   public String getCurrency() {
     return currency;
   }
-
   public void setCurrency(String currency) {
     this.currency = currency;
   }
-
   public Transaction orderCreatedDate(String orderCreatedDate) {
     this.orderCreatedDate = orderCreatedDate;
     return this;
   }
 
-   /**
-   * Order creation date in payment processing system
-   * @return orderCreatedDate
+  
+
+  /**
+  * Order creation date in payment processing system
+  * @return orderCreatedDate
   **/
-  @ApiModelProperty(value = "Order creation date in payment processing system")
+  @Schema(description = "Order creation date in payment processing system")
   public String getOrderCreatedDate() {
     return orderCreatedDate;
   }
-
   public void setOrderCreatedDate(String orderCreatedDate) {
     this.orderCreatedDate = orderCreatedDate;
   }
-
   public Transaction transactionCreatedDate(String transactionCreatedDate) {
     this.transactionCreatedDate = transactionCreatedDate;
     return this;
   }
 
-   /**
-   * Transaction creation date in payment processing system
-   * @return transactionCreatedDate
+  
+
+  /**
+  * Transaction creation date in payment processing system
+  * @return transactionCreatedDate
   **/
-  @ApiModelProperty(value = "Transaction creation date in payment processing system")
+  @Schema(description = "Transaction creation date in payment processing system")
   public String getTransactionCreatedDate() {
     return transactionCreatedDate;
   }
-
   public void setTransactionCreatedDate(String transactionCreatedDate) {
     this.transactionCreatedDate = transactionCreatedDate;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -184,7 +286,10 @@ public class Transaction {
       return false;
     }
     Transaction transaction = (Transaction) o;
-    return Objects.equals(this.endpointId, transaction.endpointId) &&
+    return Objects.equals(this.type, transaction.type) &&
+        Objects.equals(this.fromBin, transaction.fromBin) &&
+        Objects.equals(this.toBin, transaction.toBin) &&
+        Objects.equals(this.endpointId, transaction.endpointId) &&
         Objects.equals(this.invoiceId, transaction.invoiceId) &&
         Objects.equals(this.amountCentis, transaction.amountCentis) &&
         Objects.equals(this.commissionCentis, transaction.commissionCentis) &&
@@ -195,15 +300,17 @@ public class Transaction {
 
   @Override
   public int hashCode() {
-    return Objects.hash(endpointId, invoiceId, amountCentis, commissionCentis, currency, orderCreatedDate, transactionCreatedDate);
+    return java.util.Objects.hash(type, fromBin, toBin, endpointId, invoiceId, amountCentis, commissionCentis, currency, orderCreatedDate, transactionCreatedDate);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Transaction {\n");
     
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    fromBin: ").append(toIndentedString(fromBin)).append("\n");
+    sb.append("    toBin: ").append(toIndentedString(toBin)).append("\n");
     sb.append("    endpointId: ").append(toIndentedString(endpointId)).append("\n");
     sb.append("    invoiceId: ").append(toIndentedString(invoiceId)).append("\n");
     sb.append("    amountCentis: ").append(toIndentedString(amountCentis)).append("\n");
@@ -225,6 +332,5 @@ public class Transaction {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

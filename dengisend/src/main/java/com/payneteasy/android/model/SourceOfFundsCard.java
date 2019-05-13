@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,15 +18,17 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.SourceOfFundsCardExpiry;
+import com.payneteasy.android.model.SourceOfFundsCardHolder;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * SourceOfFundsCard
  */
 
 public class SourceOfFundsCard {
+
   @SerializedName("number")
   private String number = null;
 
@@ -39,80 +40,78 @@ public class SourceOfFundsCard {
 
   @SerializedName("securityCode")
   private String securityCode = null;
-
   public SourceOfFundsCard number(String number) {
     this.number = number;
     return this;
   }
 
-   /**
-   * Source card number (PAN)
-   * @return number
+  
+
+  /**
+  * Source card number (PAN)
+  * @return number
   **/
-  @ApiModelProperty(required = true, value = "Source card number (PAN)")
+  @Schema(required = true, description = "Source card number (PAN)")
   public String getNumber() {
     return number;
   }
-
   public void setNumber(String number) {
     this.number = number;
   }
-
   public SourceOfFundsCard expiry(SourceOfFundsCardExpiry expiry) {
     this.expiry = expiry;
     return this;
   }
 
-   /**
-   * Get expiry
-   * @return expiry
+  
+
+  /**
+  * Get expiry
+  * @return expiry
   **/
-  @ApiModelProperty(value = "")
+  @Schema(required = true, description = "")
   public SourceOfFundsCardExpiry getExpiry() {
     return expiry;
   }
-
   public void setExpiry(SourceOfFundsCardExpiry expiry) {
     this.expiry = expiry;
   }
-
   public SourceOfFundsCard holder(SourceOfFundsCardHolder holder) {
     this.holder = holder;
     return this;
   }
 
-   /**
-   * Get holder
-   * @return holder
+  
+
+  /**
+  * Get holder
+  * @return holder
   **/
-  @ApiModelProperty(value = "")
+  @Schema(required = true, description = "")
   public SourceOfFundsCardHolder getHolder() {
     return holder;
   }
-
   public void setHolder(SourceOfFundsCardHolder holder) {
     this.holder = holder;
   }
-
   public SourceOfFundsCard securityCode(String securityCode) {
     this.securityCode = securityCode;
     return this;
   }
 
-   /**
-   * Source card security code (CVV)
-   * @return securityCode
+  
+
+  /**
+  * Source card security code (CVV)
+  * @return securityCode
   **/
-  @ApiModelProperty(required = true, value = "Source card security code (CVV)")
+  @Schema(required = true, description = "Source card security code (CVV)")
   public String getSecurityCode() {
     return securityCode;
   }
-
   public void setSecurityCode(String securityCode) {
     this.securityCode = securityCode;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -130,9 +129,8 @@ public class SourceOfFundsCard {
 
   @Override
   public int hashCode() {
-    return Objects.hash(number, expiry, holder, securityCode);
+    return java.util.Objects.hash(number, expiry, holder, securityCode);
   }
-
 
   @Override
   public String toString() {
@@ -157,6 +155,5 @@ public class SourceOfFundsCard {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

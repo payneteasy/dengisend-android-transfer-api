@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,36 +18,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
- * DestinationOfFundsReference
+ * ContactsStatusRequest
  */
 
-public class DestinationOfFundsReference {
-  @SerializedName("clientCardId")
-  private String clientCardId = null;
+public class ContactsStatusRequest {
 
-  public DestinationOfFundsReference clientCardId(String clientCardId) {
-    this.clientCardId = clientCardId;
+  @SerializedName("account")
+  private String account = null;
+  public ContactsStatusRequest account(String account) {
+    this.account = account;
     return this;
   }
 
-   /**
-   * The destination card reference identifier (on client side)
-   * @return clientCardId
+  
+
+  /**
+  * Get account
+  * @return account
   **/
-  @ApiModelProperty(value = "The destination card reference identifier (on client side)")
-  public String getClientCardId() {
-    return clientCardId;
+  @Schema(description = "")
+  public String getAccount() {
+    return account;
   }
-
-  public void setClientCardId(String clientCardId) {
-    this.clientCardId = clientCardId;
+  public void setAccount(String account) {
+    this.account = account;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -57,22 +55,21 @@ public class DestinationOfFundsReference {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DestinationOfFundsReference destinationOfFundsReference = (DestinationOfFundsReference) o;
-    return Objects.equals(this.clientCardId, destinationOfFundsReference.clientCardId);
+    ContactsStatusRequest contactsStatusRequest = (ContactsStatusRequest) o;
+    return Objects.equals(this.account, contactsStatusRequest.account);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(clientCardId);
+    return java.util.Objects.hash(account);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DestinationOfFundsReference {\n");
+    sb.append("class ContactsStatusRequest {\n");
     
-    sb.append("    clientCardId: ").append(toIndentedString(clientCardId)).append("\n");
+    sb.append("    account: ").append(toIndentedString(account)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -87,6 +84,5 @@ public class DestinationOfFundsReference {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

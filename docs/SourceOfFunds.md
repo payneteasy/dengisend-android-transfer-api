@@ -3,5 +3,5 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**card** | **Object** |  | 
-**reference** | **Object** |  |  [optional]
+**card** | [**SourceOfFundsCard**](SourceOfFundsCard.md) |  | 
+**reference** | [**SourceOfFundsReference**](SourceOfFundsReference.md) |  |  [optional]

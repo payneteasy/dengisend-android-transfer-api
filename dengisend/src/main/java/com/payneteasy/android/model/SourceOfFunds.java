@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,59 +18,58 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.SourceOfFundsCard;
+import com.payneteasy.android.model.SourceOfFundsReference;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * Only one of these subtypes (card, reference) should be used
  */
-@ApiModel(description = "Only one of these subtypes (card, reference) should be used")
-
+@Schema(description = "Only one of these subtypes (card, reference) should be used")
 public class SourceOfFunds {
+
   @SerializedName("card")
   private SourceOfFundsCard card = null;
 
   @SerializedName("reference")
   private SourceOfFundsReference reference = null;
-
   public SourceOfFunds card(SourceOfFundsCard card) {
     this.card = card;
     return this;
   }
 
-   /**
-   * Get card
-   * @return card
+  
+
+  /**
+  * Get card
+  * @return card
   **/
-  @ApiModelProperty(value = "")
+  @Schema(required = true, description = "")
   public SourceOfFundsCard getCard() {
     return card;
   }
-
   public void setCard(SourceOfFundsCard card) {
     this.card = card;
   }
-
   public SourceOfFunds reference(SourceOfFundsReference reference) {
     this.reference = reference;
     return this;
   }
 
-   /**
-   * Get reference
-   * @return reference
+  
+
+  /**
+  * Get reference
+  * @return reference
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public SourceOfFundsReference getReference() {
     return reference;
   }
-
   public void setReference(SourceOfFundsReference reference) {
     this.reference = reference;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -87,9 +85,8 @@ public class SourceOfFunds {
 
   @Override
   public int hashCode() {
-    return Objects.hash(card, reference);
+    return java.util.Objects.hash(card, reference);
   }
-
 
   @Override
   public String toString() {
@@ -112,6 +109,5 @@ public class SourceOfFunds {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

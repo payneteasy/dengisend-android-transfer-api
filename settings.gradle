@@ -1,1 +1,3 @@
 include ':dengisend',':SampleApp'
+
+project(":SampleApp").name = "SampleApp"

@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,57 +18,56 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * SourceOfFundsCardExpiry
  */
 
 public class SourceOfFundsCardExpiry {
+
   @SerializedName("month")
   private Integer month = null;
 
   @SerializedName("year")
   private Integer year = null;
-
   public SourceOfFundsCardExpiry month(Integer month) {
     this.month = month;
     return this;
   }
 
-   /**
-   * Source Card expiration month
-   * @return month
+  
+
+  /**
+  * Source Card expiration month
+  * @return month
   **/
-  @ApiModelProperty(required = true, value = "Source Card expiration month")
+  @Schema(required = true, description = "Source Card expiration month")
   public Integer getMonth() {
     return month;
   }
-
   public void setMonth(Integer month) {
     this.month = month;
   }
-
   public SourceOfFundsCardExpiry year(Integer year) {
     this.year = year;
     return this;
   }
 
-   /**
-   * Source Card expiration year
-   * @return year
+  
+
+  /**
+  * Source Card expiration year
+  * @return year
   **/
-  @ApiModelProperty(required = true, value = "Source Card expiration year")
+  @Schema(required = true, description = "Source Card expiration year")
   public Integer getYear() {
     return year;
   }
-
   public void setYear(Integer year) {
     this.year = year;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -85,9 +83,8 @@ public class SourceOfFundsCardExpiry {
 
   @Override
   public int hashCode() {
-    return Objects.hash(month, year);
+    return java.util.Objects.hash(month, year);
   }
-
 
   @Override
   public String toString() {
@@ -110,6 +107,5 @@ public class SourceOfFundsCardExpiry {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

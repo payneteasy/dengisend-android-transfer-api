@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,58 +18,57 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Error;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * ErrorResponse
  */
 
 public class ErrorResponse {
+
   @SerializedName("error")
   private Error error = null;
 
   @SerializedName("invoiceId")
   private String invoiceId = null;
-
   public ErrorResponse error(Error error) {
     this.error = error;
     return this;
   }
 
-   /**
-   * Get error
-   * @return error
+  
+
+  /**
+  * Get error
+  * @return error
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Error getError() {
     return error;
   }
-
   public void setError(Error error) {
     this.error = error;
   }
-
   public ErrorResponse invoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
     return this;
   }
 
-   /**
-   * Transfer transaction identifier
-   * @return invoiceId
+  
+
+  /**
+  * Transfer transaction identifier
+  * @return invoiceId
   **/
-  @ApiModelProperty(value = "Transfer transaction identifier")
+  @Schema(description = "Transfer transaction identifier")
   public String getInvoiceId() {
     return invoiceId;
   }
-
   public void setInvoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -86,9 +84,8 @@ public class ErrorResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(error, invoiceId);
+    return java.util.Objects.hash(error, invoiceId);
   }
-
 
   @Override
   public String toString() {
@@ -111,6 +108,5 @@ public class ErrorResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

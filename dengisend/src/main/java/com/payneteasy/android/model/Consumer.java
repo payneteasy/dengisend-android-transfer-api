@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,10 +18,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,33 +28,33 @@ import java.util.List;
  */
 
 public class Consumer {
+
   @SerializedName("device")
-  private ConsumerDevice device = null;
+  private Object device = null;
 
   @SerializedName("ipAddresses")
   private List<String> ipAddresses = null;
 
   @SerializedName("email")
   private String email = null;
-
-  public Consumer device(ConsumerDevice device) {
+  public Consumer device(Object device) {
     this.device = device;
     return this;
   }
 
-   /**
-   * Get device
-   * @return device
+  
+
+  /**
+  * Get device
+  * @return device
   **/
-  @ApiModelProperty(value = "")
-  public ConsumerDevice getDevice() {
+  @Schema(description = "")
+  public Object getDevice() {
     return device;
   }
-
-  public void setDevice(ConsumerDevice device) {
+  public void setDevice(Object device) {
     this.device = device;
   }
-
   public Consumer ipAddresses(List<String> ipAddresses) {
     this.ipAddresses = ipAddresses;
     return this;
@@ -71,38 +68,35 @@ public class Consumer {
     return this;
   }
 
-   /**
-   * Consumer&#39;s IP addresses
-   * @return ipAddresses
+  /**
+  * Consumer&#x27;s IP addresses
+  * @return ipAddresses
   **/
-  @ApiModelProperty(value = "Consumer's IP addresses")
+  @Schema(description = "Consumer's IP addresses")
   public List<String> getIpAddresses() {
     return ipAddresses;
   }
-
   public void setIpAddresses(List<String> ipAddresses) {
     this.ipAddresses = ipAddresses;
   }
-
   public Consumer email(String email) {
     this.email = email;
     return this;
   }
 
-   /**
-   * The consumer’s email address
-   * @return email
+  
+
+  /**
+  * The consumer’s email address
+  * @return email
   **/
-  @ApiModelProperty(value = "The consumer’s email address")
+  @Schema(description = "The consumer’s email address")
   public String getEmail() {
     return email;
   }
-
   public void setEmail(String email) {
     this.email = email;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -119,9 +113,8 @@ public class Consumer {
 
   @Override
   public int hashCode() {
-    return Objects.hash(device, ipAddresses, email);
+    return java.util.Objects.hash(device, ipAddresses, email);
   }
-
 
   @Override
   public String toString() {
@@ -145,6 +138,5 @@ public class Consumer {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

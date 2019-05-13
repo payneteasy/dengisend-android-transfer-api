@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,58 +18,58 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Consumer;
+import com.payneteasy.android.model.Session;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * CardsIdsRequest
  */
 
 public class CardsIdsRequest {
+
   @SerializedName("consumer")
   private Consumer consumer = null;
 
   @SerializedName("session")
   private Session session = null;
-
   public CardsIdsRequest consumer(Consumer consumer) {
     this.consumer = consumer;
     return this;
   }
 
-   /**
-   * Get consumer
-   * @return consumer
+  
+
+  /**
+  * Get consumer
+  * @return consumer
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Consumer getConsumer() {
     return consumer;
   }
-
   public void setConsumer(Consumer consumer) {
     this.consumer = consumer;
   }
-
   public CardsIdsRequest session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -86,9 +85,8 @@ public class CardsIdsRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(consumer, session);
+    return java.util.Objects.hash(consumer, session);
   }
-
 
   @Override
   public String toString() {
@@ -111,6 +109,5 @@ public class CardsIdsRequest {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

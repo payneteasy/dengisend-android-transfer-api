@@ -7,13 +7,13 @@ paths:
     get:
       summary: Generate access token for transfer operation
       parameters:
-      - name: bank_id
-        in: path
-        type: string
-        description: Bank identifier
-        required: true
+        - name: bank_id
+          in: path
+          type: string
+          description: Bank identifier
+          required: true
       produces:
-      - application/json
+        - application/json
       responses:
         '200':
           description: Randomly generated access token
@@ -27,16 +27,16 @@ paths:
     post:
       summary: Get transfer rates and limits configuration
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: sessionData
-        in: body
-        required: true
-        description: Session info
-        schema:
-          $ref: '#/definitions/RatesRequest'
+        - name: sessionData
+          in: body
+          required: true
+          description: Session info
+          schema:
+            $ref: '#/definitions/RatesRequest'
       responses:
         '200':
           description: Rates and limits data
@@ -50,16 +50,16 @@ paths:
     post:
       summary: Get transaction commission
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: sessionData
-        description: Session info
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/CommissionRequest'
+        - name: sessionData
+          description: Session info
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CommissionRequest'
       responses:
         '200':
           description: Commission
@@ -72,17 +72,17 @@ paths:
   /transfer/initiate-transfer:
     post:
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       summary: Initiate transfer request
       parameters:
-      - name: initiateTransferData
-        in: body
-        description: Device info, location data, session info, amount
-        required: true
-        schema:
-          $ref: '#/definitions/InitiateTransferRequest'
+        - name: initiateTransferData
+          in: body
+          description: Device info, location data, session info, amount
+          required: true
+          schema:
+            $ref: '#/definitions/InitiateTransferRequest'
       responses:
         '200':
           description: Enpoint config, rates, session tokens to perform transfer request
@@ -99,9 +99,9 @@ paths:
   /cardrefs/{invoiceId}/get-client-ids:
     post:
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       summary: Fetch source and destination cards ids
       parameters:
         - name: invoiceId
@@ -131,27 +131,27 @@ paths:
   /transfer/{endpointId}/{invoiceId}:
     post:
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       summary: Perform transfer request
       parameters:
-      - name: endpointId
-        in: path
-        type: string
-        description: Entry point identifier for transfer transaction
-        required: true
-      - name: invoiceId
-        in: path
-        type: string
-        description: Transfer transaction identifier
-        required: true
-      - name: performTransferRequestData
-        in: body
-        description: transfer data
-        required: true
-        schema:
-          $ref: '#/definitions/PerformTransferRequest'
+        - name: endpointId
+          in: path
+          type: string
+          description: Entry point identifier for transfer transaction
+          required: true
+        - name: invoiceId
+          in: path
+          type: string
+          description: Transfer transaction identifier
+          required: true
+        - name: performTransferRequestData
+          in: body
+          description: transfer data
+          required: true
+          schema:
+            $ref: '#/definitions/PerformTransferRequest'
       responses:
         '200':
           description: Perform transfer response
@@ -168,27 +168,27 @@ paths:
   /transfer/{endpointId}/{invoiceId}/status:
     post:
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       summary: Get funds transfer status
       parameters:
-      - name: endpointId
-        in: path
-        type: string
-        description: Entry point identifier for transfer transaction
-        required: true
-      - name: invoiceId
-        in: path
-        type: string
-        description: Transfer transaction identifier
-        required: true
-      - name: transferStatusRequest
-        in: body
-        description: Transfer data to check
-        required: true
-        schema:
-          $ref: '#/definitions/TransferStatusRequest'
+        - name: endpointId
+          in: path
+          type: string
+          description: Entry point identifier for transfer transaction
+          required: true
+        - name: invoiceId
+          in: path
+          type: string
+          description: Transfer transaction identifier
+          required: true
+        - name: transferStatusRequest
+          in: body
+          description: Transfer data to check
+          required: true
+          schema:
+            $ref: '#/definitions/TransferStatusRequest'
       responses:
         '200':
           description: Transfer status response
@@ -205,17 +205,17 @@ paths:
   /support/send-message:
     post:
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       summary: send feedback to support
       parameters:
-      - name: sendFeedbackRequest
-        in: body
-        description: Transfer data to check
-        required: true
-        schema:
-          $ref: '#/definitions/SendFeedbackRequest'
+        - name: sendFeedbackRequest
+          in: body
+          description: Transfer data to check
+          required: true
+          schema:
+            $ref: '#/definitions/SendFeedbackRequest'
       responses:
         '200':
           description: Send feedback response
@@ -232,17 +232,17 @@ paths:
   /contacts/status:
     post:
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       summary: send feedback to support
       parameters:
-      - name: contactsStatusRequest
-        in: body
-        description: Account data to check
-        required: true
-        schema:
-          $ref: '#/definitions/ContactsStatusRequest'
+        - name: contactsStatusRequest
+          in: body
+          description: Account data to check
+          required: true
+          schema:
+            $ref: '#/definitions/ContactsStatusRequest'
       responses:
         '200':
           description: Contacts sync status response
@@ -278,7 +278,7 @@ definitions:
       device:
         type: object
         required:
-        - serialNumber
+          - serialNumber
         properties:
           imei:
             type: string
@@ -302,20 +302,16 @@ definitions:
       type:
         type: string
         description: Transaction type
-        defaultValue: internal
-        required: false
         enum:
           - internal
           - international
       fromBin:
         type: integer
         format: int32
-        required: false
         description: The Source card BIN
       toBin:
         type: integer
         format: int32
-        required: false
         description: The Destination card BIN
       endpointId:
         type: string
@@ -348,57 +344,65 @@ definitions:
     description: Only one of these subtypes (card, reference) should be used
     properties:
       card:
-        type: object
-        required:
-        - number
-        - expiry
-        - holder
-        - securityCode
-        properties:
-          number:
-            type: string
-            description: Source card number (PAN)
-          expiry:
-            type: object
-            required:
-              - month
-              - year
-            properties:
-              month:
-                type: integer
-                format: int32
-                description: Source Card expiration month
-              year:
-                type: integer
-                format: int32
-                description: Source Card expiration year
-          holder:
-            type: object
-            required:
-              - firstName
-              - lastName
-            properties:
-              firstName:
-                type: string
-                description: Cardholder’s first name
-              lastName:
-                type: string
-                description: Cardholder’s last name
-          securityCode:
-            type: string
-            description: Source card security code (CVV)
+        $ref: '#/definitions/SourceOfFundsCard'
       reference:
-        type: object
-        required:
-        - clientCardId
-        - securityCode
-        properties:
-          clientCardId:
-            type: string
-            description: Source card reference identifier (on client side)
-          securityCode:
-            type: string
-            description: Source card security code (CVV)
+        $ref: '#/definitions/SourceOfFundsReference'
+  SourceOfFundsCard:
+    type: object
+    required:
+      - number
+      - expiry
+      - holder
+      - securityCode
+    properties:
+      number:
+        type: string
+        description: Source card number (PAN)
+      expiry:
+        $ref: '#/definitions/SourceOfFundsCardExpiry'
+      holder:
+        $ref: '#/definitions/SourceOfFundsCardHolder'
+      securityCode:
+        type: string
+        description: Source card security code (CVV)
+  SourceOfFundsCardExpiry:
+    type: object
+    required:
+      - month
+      - year
+    properties:
+      month:
+        type: integer
+        format: int32
+        description: Source Card expiration month
+      year:
+        type: integer
+        format: int32
+        description: Source Card expiration year
+  SourceOfFundsCardHolder:
+    type: object
+    required:
+      - firstName
+      - lastName
+    properties:
+      firstName:
+        type: string
+        description: Cardholder’s first name
+      lastName:
+        type: string
+        description: Cardholder’s last name
+  SourceOfFundsReference:
+    type: object
+    required:
+      - clientCardId
+      - securityCode
+    properties:
+      clientCardId:
+        type: string
+        description: Source card reference identifier (on client side)
+      securityCode:
+        type: string
+        description: Source card security code (CVV)
   DestinationOfFunds:
     type: object
     required:
@@ -406,19 +410,23 @@ definitions:
     description: Only one of these subtypes (card, reference) should be used
     properties:
       card:
-        type: object
-        required:
-        - number
-        properties:
-          number:
-            type: string
-            description: Destination card number (PAN)
+        $ref: '#/definitions/DestinationOfFundsCard'
       reference:
-        type: object
-        properties:
-          clientCardId:
-            type: string
-            description: The destination card reference identifier (on client side)
+        $ref: '#/definitions/DestinationOfFundsReference'
+  DestinationOfFundsCard:
+    type: object
+    required:
+      - number
+    properties:
+      number:
+        type: string
+        description: Destination card number (PAN)
+  DestinationOfFundsReference:
+    type: object
+    properties:
+      clientCardId:
+        type: string
+        description: The destination card reference identifier (on client side)
   Error:
     type: object
     properties:
@@ -426,15 +434,15 @@ definitions:
         type: string
         description: 'The cause of the error'
         enum:
-        - FILTERED
-        - DECLINED
-        - INVALID_CONFIGURATION
-        - INVALID_REQUEST
-        - INTERNAL_ERROR
-        - PROCESSING_FAILED
-        - SERVER_FAILED
-        - SERVER_UNAVAILABLE
-        - ORDER_NOT_FOUND
+          - FILTERED
+          - DECLINED
+          - INVALID_CONFIGURATION
+          - INVALID_REQUEST
+          - INTERNAL_ERROR
+          - PROCESSING_FAILED
+          - SERVER_FAILED
+          - SERVER_UNAVAILABLE
+          - ORDER_NOT_FOUND
       code:
         type: string
         description: The unique error code
@@ -449,8 +457,8 @@ definitions:
   RatesRequest:
     type: object
     required:
-    - consumer
-    - session
+      - consumer
+      - session
     properties:
       consumer:
         $ref: '#/definitions/Consumer'
@@ -484,8 +492,8 @@ definitions:
   CommissionRequest:
     type: object
     required:
-    - session
-    - consumer
+      - session
+      - consumer
     properties:
       session:
         $ref: '#/definitions/Session'
@@ -509,8 +517,8 @@ definitions:
   InitiateTransferRequest:
     type: object
     required:
-    - consumer
-    - transaction
+      - consumer
+      - transaction
     properties:
       consumer:
         $ref: '#/definitions/Consumer'
@@ -554,11 +562,11 @@ definitions:
   PerformTransferRequest:
     type: object
     required:
-    - consumer
-    - destinationOfFunds
-    - sourceOfFunds
-    - session
-    - transaction
+      - consumer
+      - destinationOfFunds
+      - sourceOfFunds
+      - session
+      - transaction
     properties:
       consumer:
         $ref: '#/definitions/Consumer'
@@ -582,7 +590,7 @@ definitions:
   TransferStatusRequest:
     type: object
     required:
-    - session
+      - session
     properties:
       session:
         $ref: '#/definitions/Session'
@@ -607,10 +615,10 @@ definitions:
         type: string
         description: 'The state of the transfer'
         enum:
-        - PROCESSING
-        - REDIRECT_REQUEST
-        - APPROVED
-        - DECLINED
+          - PROCESSING
+          - REDIRECT_REQUEST
+          - APPROVED
+          - DECLINED
       transaction:
         $ref: '#/definitions/Transaction'
       error:
@@ -626,21 +634,21 @@ definitions:
         type: string
         description: '3D authentication status'
         enum:
-        - AUTHENTICATED
-        - NOT_AUTHENTICATED
-        - UNSUPPORTED
-        - DECLINED
+          - AUTHENTICATED
+          - NOT_AUTHENTICATED
+          - UNSUPPORTED
+          - DECLINED
       randomSumAuthStatus:
         type: string
         description: 'Random sum authentication status'
         enum:
-        - AUTHENTICATED
-        - NOT_AUTHENTICATED
+          - AUTHENTICATED
+          - NOT_AUTHENTICATED
   CardsIdsRequest:
     type: object
     required:
-    - consumer
-    - session
+      - consumer
+      - session
     properties:
       consumer:
         $ref: '#/definitions/Consumer'
@@ -684,9 +692,9 @@ definitions:
       status:
         type: string
         enum:
-        - SYNCED
-        - SYNC_NEEDED
-        - ACCOUNT_NOT_FOUND
+          - SYNCED
+          - SYNC_NEEDED
+          - ACCOUNT_NOT_FOUND
       error:
         $ref: '#/definitions/Error'
   ErrorResponse:

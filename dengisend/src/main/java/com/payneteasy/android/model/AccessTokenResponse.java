@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,37 +18,36 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Session;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * AccessTokenResponse
  */
 
 public class AccessTokenResponse {
+
   @SerializedName("session")
   private Session session = null;
-
   public AccessTokenResponse session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -64,9 +62,8 @@ public class AccessTokenResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(session);
+    return java.util.Objects.hash(session);
   }
-
 
   @Override
   public String toString() {
@@ -88,6 +85,5 @@ public class AccessTokenResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

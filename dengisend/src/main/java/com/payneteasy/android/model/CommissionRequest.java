@@ -18,44 +18,27 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.payneteasy.android.model.Error;
+import com.payneteasy.android.model.Consumer;
 import com.payneteasy.android.model.Session;
+import com.payneteasy.android.model.Transaction;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 
 /**
- * PerformTransferResponse
+ * CommissionRequest
  */
 
-public class PerformTransferResponse {
-
-  @SerializedName("invoiceId")
-  private String invoiceId = null;
+public class CommissionRequest {
 
   @SerializedName("session")
   private Session session = null;
 
-  @SerializedName("error")
-  private Error error = null;
-  public PerformTransferResponse invoiceId(String invoiceId) {
-    this.invoiceId = invoiceId;
-    return this;
-  }
+  @SerializedName("consumer")
+  private Consumer consumer = null;
 
-  
-
-  /**
-  * Get invoiceId
-  * @return invoiceId
-  **/
-  @Schema(description = "")
-  public String getInvoiceId() {
-    return invoiceId;
-  }
-  public void setInvoiceId(String invoiceId) {
-    this.invoiceId = invoiceId;
-  }
-  public PerformTransferResponse session(Session session) {
+  @SerializedName("transaction")
+  private Transaction transaction = null;
+  public CommissionRequest session(Session session) {
     this.session = session;
     return this;
   }
@@ -66,30 +49,48 @@ public class PerformTransferResponse {
   * Get session
   * @return session
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Session getSession() {
     return session;
   }
   public void setSession(Session session) {
     this.session = session;
   }
-  public PerformTransferResponse error(Error error) {
-    this.error = error;
+  public CommissionRequest consumer(Consumer consumer) {
+    this.consumer = consumer;
     return this;
   }
 
   
 
   /**
-  * Get error
-  * @return error
+  * Get consumer
+  * @return consumer
+  **/
+  @Schema(required = true, description = "")
+  public Consumer getConsumer() {
+    return consumer;
+  }
+  public void setConsumer(Consumer consumer) {
+    this.consumer = consumer;
+  }
+  public CommissionRequest transaction(Transaction transaction) {
+    this.transaction = transaction;
+    return this;
+  }
+
+  
+
+  /**
+  * Get transaction
+  * @return transaction
   **/
   @Schema(description = "")
-  public Error getError() {
-    return error;
+  public Transaction getTransaction() {
+    return transaction;
   }
-  public void setError(Error error) {
-    this.error = error;
+  public void setTransaction(Transaction transaction) {
+    this.transaction = transaction;
   }
   @Override
   public boolean equals(java.lang.Object o) {
@@ -99,25 +100,25 @@ public class PerformTransferResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PerformTransferResponse performTransferResponse = (PerformTransferResponse) o;
-    return Objects.equals(this.invoiceId, performTransferResponse.invoiceId) &&
-        Objects.equals(this.session, performTransferResponse.session) &&
-        Objects.equals(this.error, performTransferResponse.error);
+    CommissionRequest commissionRequest = (CommissionRequest) o;
+    return Objects.equals(this.session, commissionRequest.session) &&
+        Objects.equals(this.consumer, commissionRequest.consumer) &&
+        Objects.equals(this.transaction, commissionRequest.transaction);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(invoiceId, session, error);
+    return java.util.Objects.hash(session, consumer, transaction);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PerformTransferResponse {\n");
+    sb.append("class CommissionRequest {\n");
     
-    sb.append("    invoiceId: ").append(toIndentedString(invoiceId)).append("\n");
     sb.append("    session: ").append(toIndentedString(session)).append("\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    consumer: ").append(toIndentedString(consumer)).append("\n");
+    sb.append("    transaction: ").append(toIndentedString(transaction)).append("\n");
     sb.append("}");
     return sb.toString();
   }

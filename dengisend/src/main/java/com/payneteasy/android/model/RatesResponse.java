@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,15 +18,16 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Error;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * RatesResponse
  */
 
 public class RatesResponse {
+
   @SerializedName("rateInterest")
   private Double rateInterest = null;
 
@@ -44,117 +44,115 @@ public class RatesResponse {
   private Double limitMax = null;
 
   @SerializedName("error")
-  private RatesResponseError error = null;
-
+  private Error error = null;
   public RatesResponse rateInterest(Double rateInterest) {
     this.rateInterest = rateInterest;
     return this;
   }
 
-   /**
-   * Transfer rate interest (percent)
-   * @return rateInterest
+  
+
+  /**
+  * Transfer rate interest (percent)
+  * @return rateInterest
   **/
-  @ApiModelProperty(value = "Transfer rate interest (percent)")
+  @Schema(description = "Transfer rate interest (percent)")
   public Double getRateInterest() {
     return rateInterest;
   }
-
   public void setRateInterest(Double rateInterest) {
     this.rateInterest = rateInterest;
   }
-
   public RatesResponse rateMin(Double rateMin) {
     this.rateMin = rateMin;
     return this;
   }
 
-   /**
-   * Minimum commission amount
-   * @return rateMin
+  
+
+  /**
+  * Minimum commission amount
+  * @return rateMin
   **/
-  @ApiModelProperty(value = "Minimum commission amount")
+  @Schema(description = "Minimum commission amount")
   public Double getRateMin() {
     return rateMin;
   }
-
   public void setRateMin(Double rateMin) {
     this.rateMin = rateMin;
   }
-
   public RatesResponse rateMax(Double rateMax) {
     this.rateMax = rateMax;
     return this;
   }
 
-   /**
-   * Maximum commission amount
-   * @return rateMax
+  
+
+  /**
+  * Maximum commission amount
+  * @return rateMax
   **/
-  @ApiModelProperty(value = "Maximum commission amount")
+  @Schema(description = "Maximum commission amount")
   public Double getRateMax() {
     return rateMax;
   }
-
   public void setRateMax(Double rateMax) {
     this.rateMax = rateMax;
   }
-
   public RatesResponse limitMin(Double limitMin) {
     this.limitMin = limitMin;
     return this;
   }
 
-   /**
-   * Minimum transfer amount
-   * @return limitMin
+  
+
+  /**
+  * Minimum transfer amount
+  * @return limitMin
   **/
-  @ApiModelProperty(value = "Minimum transfer amount")
+  @Schema(description = "Minimum transfer amount")
   public Double getLimitMin() {
     return limitMin;
   }
-
   public void setLimitMin(Double limitMin) {
     this.limitMin = limitMin;
   }
-
   public RatesResponse limitMax(Double limitMax) {
     this.limitMax = limitMax;
     return this;
   }
 
-   /**
-   * Maximum transfer amount
-   * @return limitMax
+  
+
+  /**
+  * Maximum transfer amount
+  * @return limitMax
   **/
-  @ApiModelProperty(value = "Maximum transfer amount")
+  @Schema(description = "Maximum transfer amount")
   public Double getLimitMax() {
     return limitMax;
   }
-
   public void setLimitMax(Double limitMax) {
     this.limitMax = limitMax;
   }
-
-  public RatesResponse error(RatesResponseError error) {
+  public RatesResponse error(Error error) {
     this.error = error;
     return this;
   }
 
-   /**
-   * Get error
-   * @return error
+  
+
+  /**
+  * Get error
+  * @return error
   **/
-  @ApiModelProperty(value = "")
-  public RatesResponseError getError() {
+  @Schema(description = "")
+  public Error getError() {
     return error;
   }
-
-  public void setError(RatesResponseError error) {
+  public void setError(Error error) {
     this.error = error;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -174,9 +172,8 @@ public class RatesResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(rateInterest, rateMin, rateMax, limitMin, limitMax, error);
+    return java.util.Objects.hash(rateInterest, rateMin, rateMax, limitMin, limitMax, error);
   }
-
 
   @Override
   public String toString() {
@@ -203,6 +200,5 @@ public class RatesResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

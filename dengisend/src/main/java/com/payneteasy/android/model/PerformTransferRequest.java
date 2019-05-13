@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,15 +18,20 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.payneteasy.android.model.Consumer;
+import com.payneteasy.android.model.DestinationOfFunds;
+import com.payneteasy.android.model.Session;
+import com.payneteasy.android.model.SourceOfFunds;
+import com.payneteasy.android.model.Transaction;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * PerformTransferRequest
  */
 
 public class PerformTransferRequest {
+
   @SerializedName("consumer")
   private Consumer consumer = null;
 
@@ -42,98 +46,96 @@ public class PerformTransferRequest {
 
   @SerializedName("session")
   private Session session = null;
-
   public PerformTransferRequest consumer(Consumer consumer) {
     this.consumer = consumer;
     return this;
   }
 
-   /**
-   * Get consumer
-   * @return consumer
+  
+
+  /**
+  * Get consumer
+  * @return consumer
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Consumer getConsumer() {
     return consumer;
   }
-
   public void setConsumer(Consumer consumer) {
     this.consumer = consumer;
   }
-
   public PerformTransferRequest sourceOfFunds(SourceOfFunds sourceOfFunds) {
     this.sourceOfFunds = sourceOfFunds;
     return this;
   }
 
-   /**
-   * Get sourceOfFunds
-   * @return sourceOfFunds
+  
+
+  /**
+  * Get sourceOfFunds
+  * @return sourceOfFunds
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public SourceOfFunds getSourceOfFunds() {
     return sourceOfFunds;
   }
-
   public void setSourceOfFunds(SourceOfFunds sourceOfFunds) {
     this.sourceOfFunds = sourceOfFunds;
   }
-
   public PerformTransferRequest destinationOfFunds(DestinationOfFunds destinationOfFunds) {
     this.destinationOfFunds = destinationOfFunds;
     return this;
   }
 
-   /**
-   * Get destinationOfFunds
-   * @return destinationOfFunds
+  
+
+  /**
+  * Get destinationOfFunds
+  * @return destinationOfFunds
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public DestinationOfFunds getDestinationOfFunds() {
     return destinationOfFunds;
   }
-
   public void setDestinationOfFunds(DestinationOfFunds destinationOfFunds) {
     this.destinationOfFunds = destinationOfFunds;
   }
-
   public PerformTransferRequest transaction(Transaction transaction) {
     this.transaction = transaction;
     return this;
   }
 
-   /**
-   * Get transaction
-   * @return transaction
+  
+
+  /**
+  * Get transaction
+  * @return transaction
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Transaction getTransaction() {
     return transaction;
   }
-
   public void setTransaction(Transaction transaction) {
     this.transaction = transaction;
   }
-
   public PerformTransferRequest session(Session session) {
     this.session = session;
     return this;
   }
 
-   /**
-   * Get session
-   * @return session
+  
+
+  /**
+  * Get session
+  * @return session
   **/
-  @ApiModelProperty(required = true, value = "")
+  @Schema(required = true, description = "")
   public Session getSession() {
     return session;
   }
-
   public void setSession(Session session) {
     this.session = session;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -152,9 +154,8 @@ public class PerformTransferRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(consumer, sourceOfFunds, destinationOfFunds, transaction, session);
+    return java.util.Objects.hash(consumer, sourceOfFunds, destinationOfFunds, transaction, session);
   }
-
 
   @Override
   public String toString() {
@@ -180,6 +181,5 @@ public class PerformTransferRequest {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}

@@ -1,4 +1,3 @@
-
 # SourceOfFundsCard
 
 ## Properties
@@ -8,6 +7,3 @@ Name | Type | Description | Notes
 **expiry** | [**SourceOfFundsCardExpiry**](SourceOfFundsCardExpiry.md) |  | 
 **holder** | [**SourceOfFundsCardHolder**](SourceOfFundsCardHolder.md) |  | 
 **securityCode** | **String** | Source card security code (CVV) | 
-
-
-

@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.payneteasy.android.model;
 
 import java.util.Objects;
@@ -19,57 +18,56 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 
 /**
  * SourceOfFundsReference
  */
 
 public class SourceOfFundsReference {
+
   @SerializedName("clientCardId")
   private String clientCardId = null;
 
   @SerializedName("securityCode")
   private String securityCode = null;
-
   public SourceOfFundsReference clientCardId(String clientCardId) {
     this.clientCardId = clientCardId;
     return this;
   }
 
-   /**
-   * Source card reference identifier (on client side)
-   * @return clientCardId
+  
+
+  /**
+  * Source card reference identifier (on client side)
+  * @return clientCardId
   **/
-  @ApiModelProperty(required = true, value = "Source card reference identifier (on client side)")
+  @Schema(required = true, description = "Source card reference identifier (on client side)")
   public String getClientCardId() {
     return clientCardId;
   }
-
   public void setClientCardId(String clientCardId) {
     this.clientCardId = clientCardId;
   }
-
   public SourceOfFundsReference securityCode(String securityCode) {
     this.securityCode = securityCode;
     return this;
   }
 
-   /**
-   * Source card security code (CVV)
-   * @return securityCode
+  
+
+  /**
+  * Source card security code (CVV)
+  * @return securityCode
   **/
-  @ApiModelProperty(required = true, value = "Source card security code (CVV)")
+  @Schema(required = true, description = "Source card security code (CVV)")
   public String getSecurityCode() {
     return securityCode;
   }
-
   public void setSecurityCode(String securityCode) {
     this.securityCode = securityCode;
   }
-
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -85,9 +83,8 @@ public class SourceOfFundsReference {
 
   @Override
   public int hashCode() {
-    return Objects.hash(clientCardId, securityCode);
+    return java.util.Objects.hash(clientCardId, securityCode);
   }
-
 
   @Override
   public String toString() {
@@ -110,6 +107,5 @@ public class SourceOfFundsReference {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
-}
 
+}
