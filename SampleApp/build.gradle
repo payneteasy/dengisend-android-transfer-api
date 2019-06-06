@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.owasp:dependency-check-gradle:5.0.0-M3.1"
+        classpath "org.owasp:dependency-check-gradle:${property('owasp.dependencyCheck.version')}"
     }
 }
 
@@ -51,7 +51,7 @@ android {
 }
 
 dependencyCheck {
-    format='XML'
+    format = "${property('owasp.dependencyCheck.format')}"
 }
 
 android.applicationVariants.all { variant ->
