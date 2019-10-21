@@ -73,7 +73,7 @@ dependencies {
     implementation "io.card:android-sdk:$rootProject.cardioVersion"
 
     // Dagger dependencies
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
 
