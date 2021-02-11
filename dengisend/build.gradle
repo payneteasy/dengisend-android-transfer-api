@@ -4,9 +4,9 @@ targetCompatibility = 1.7
 
 
 ext {
-    retrofitVersion = "2.5.0"
-    swaggerAnnotationsVersion = "2.0.8"
-    jodatimeVersion = "2.9.9"
+    retrofitVersion = "2.9.0"
+    swaggerAnnotationsVersion = "2.1.6"
+    jodatimeVersion = "2.10.10"
 }
 
 dependencies {

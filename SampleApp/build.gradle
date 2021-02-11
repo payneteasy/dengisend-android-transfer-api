@@ -12,6 +12,10 @@ buildscript {
 apply plugin: "com.android.application"
 apply plugin: "org.owasp.dependencycheck"
 
+dependencyCheck {
+    skipConfigurations += 'lintClassPath'
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -62,6 +66,19 @@ dependencies {
     implementation project(':dengisend')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // https://mvnrepository.com/artifact/com.android.tools.lint/lint-gradle-api
+    implementation(group: 'com.android.tools.lint', name: 'lint-gradle-api', version: '27.1.2') {
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-common'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
+        exclude group: 'org.apache.commons', module: 'commons-compress'
+        exclude group: 'org.bouncycastle', module: 'bcpkix-jdk15on'
+    }
+
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
@@ -72,10 +89,32 @@ dependencies {
     // card.io
     implementation "io.card:android-sdk:$rootProject.cardioVersion"
 
+    implementation('com.google.guava:guava') {
+        version {
+            strictly '30.1-jre'
+        }
+    }
+    implementation('com.google.guava:guava') {
+        version {
+            strictly '30.1-jre'
+        }
+    }
+
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    implementation('org.bouncycastle:bcprov-jdk15on') {
+        version {
+            strictly '1.68'
+        }
+    }
+
     // Dagger dependencies
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
+    annotationProcessor('com.google.dagger:dagger-compiler:2.15') {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+    implementation("com.google.dagger:dagger:$rootProject.daggerVersion") {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
