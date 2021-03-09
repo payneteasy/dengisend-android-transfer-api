@@ -18,7 +18,6 @@ dependencyCheck {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.payneteasy.dengisend"
@@ -51,7 +50,6 @@ android {
             applicationIdSuffix = ".dengisend"
         }
     }
-    buildToolsVersion '28.0.3'
 }
 
 dependencyCheck {
